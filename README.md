@@ -69,8 +69,8 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
 
 
     @Override  
- public void callFunction(String functionName, QV8Element params, QuickService.FunctionCallBackListener resultListener) {  
- QV8Object v8Object = new QV8Object();  
+  public void callFunction(String functionName, QV8Element params, QuickService.FunctionCallBackListener resultListener) {  
+     QV8Object v8Object = new QV8Object();  
      switch (functionName) {  
             case "GetIdentity":  
             v8Object.add("TCKN", "11111111118");  
