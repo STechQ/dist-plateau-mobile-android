@@ -70,7 +70,12 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
 
     @Override  
   public void callFunction(String functionName, QV8Element params, QuickService.FunctionCallBackListener resultListener) {  
-     QV8Object v8Object = new QV8Object();  
+     QV8Object v8Object = new QV8Object();
+
+//To add primitive type, use QV8Primitive(new QV8Primitive(true),new QV8Primitive(2),new QV8Primitive("string")).
+//To add map type, use QV8Object (object = new QV8Object(),object.add("key",string|boolean,integer,float,QV8Primitive,QV8Array,QV8Object)).
+//To add array type, use QV8Array (array = new QV8Array(),array.add(string|boolean,integer,float,QV8Primitive,QV8Array,QV8Object)).
+
      switch (functionName) {  
             case "GetIdentity":  
             v8Object.add("TCKN", "11111111118");  
