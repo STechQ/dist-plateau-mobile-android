@@ -68,6 +68,30 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
   }
 
 
+    @Override  
+    public void callFunction(String functionName, QV8Element params, QuickService.FunctionCallBackListener resultListener) {  
+    QV8Object v8Object = new QV8Object();  
+     switch (functionName) {  
+            case "GetIdentity":  
+            v8Object.add("TCKN", "11111111118");  
+            v8Object.add("Name", "Şükrü");  
+            v8Object.add("Surname", "Karamann");  
+            break; 
+            
+            case "GetMailAddress":  
+            v8Object.add("Email", "sukru.karaman@softtech.com.tr");  
+            
+            break;  
+            case "GetPhoneNumber":  
+                v8Object.add("PhoneNumber", "905514141986");  
+            break;  
+	
+        resultListener.onFunctionResult(v8Object);  
+      
+    }
+
+
+
 
 
 
