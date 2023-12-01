@@ -67,6 +67,18 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
  	quickService.release();  
   }
 
+ @Override
+    public void onQuickFragmentCreated(boolean addToBackStack, QFragment fragment, String tag) {
+        if (!isFinishing()) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.addToBackStack(tag);
+
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).add(
+                    R.id.q_content_fragment_layout, fragment
+                    , tag).commit();
+        }
+    }
+
 
     @Override  
   public void callFunction(String functionName, QV8Element params, QuickService.FunctionCallBackListener resultListener) {  
