@@ -73,6 +73,7 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.addToBackStack(tag);
 
+	    // Change q_content_fragment_layout with your fragment id.
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).add(
                     R.id.q_content_fragment_layout, fragment
                     , tag).commit();
