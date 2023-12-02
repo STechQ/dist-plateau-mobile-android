@@ -8,12 +8,12 @@
 
 ***Gradle:***
 
-    implementation "com.quick.softtech.sdk:version"
+    implementation "com.softtech.quick.sdk:version"
 
  ***Maven:***
 
     <dependency>
-      <groupId>com.quick.softtech.sdk</groupId>
+      <groupId>com.softtech.quick.sdk</groupId>
       <artifactId>android</artifactId>
       <version>1.0.0</version>
     </dependency>
