@@ -10,6 +10,35 @@
 
     implementation "com.softtech.quick.sdk:version"
 
+    //Third party
+    implementation 'com.facebook.soloader:soloader:0.10.4'
+    implementation "com.airbnb.android:lottie:4.2.0"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.ext.rxAndroidVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$rootProject.ext.retrofitVersion"
+    implementation "com.jakewharton.timber:timber:$rootProject.ext.timberVersion"
+    implementation 'org.conscrypt:conscrypt-android:2.2.1'
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+    implementation "commons-beanutils:commons-beanutils:$rootProject.ext.apacheCommons.beanutilsVersion"
+    implementation "org.apache.commons:commons-lang3:$rootProject.ext.apacheCommons.commonslangVersion"
+    implementation "com.eclipsesource.j2v8:j2v8:6.2.1@aar"
+    implementation 'com.facebook.yoga:yoga-layout:2.0.0'
+
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    implementation 'com.jakewharton.rxbinding4:rxbinding-core:4.0.0'
+    implementation "commons-codec:commons-codec:1.15"
+
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
+
+    def room_version = "2.4.0-alpha03"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+
  ***Maven:***
 
     <dependency>
