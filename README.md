@@ -96,8 +96,9 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
                 .maxRequestRetryCount(0).setLanguage("tr-TR")  
                 .setSettingsUrl(settingsUrl)  // set settings url, if not provied set null.
                 .setClientCustomFunctionTriggerListener(this)  
-                .timeOutRequestSeconds(60)  
-                .setBaseUrl(SuperAppUrlMap.BASE_URL.getUrl());  
+                .timeOutRequestSeconds(60)
+		.setDeepLinkParameters(null)  
+                .setBaseUrl(baseUrl);  
   
 	quickService = builder.build(this).getQuickService();  
 	quickService.initializeAsync(this);  
