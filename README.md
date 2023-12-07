@@ -68,14 +68,20 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
   ScreenNavController,  
   QuickService.QuickCallBackListener, {  
     private QuickService quickService;  
-  
+
+ /*
+  private static final String settingsUrl =
+            "settings/settings_mobile.json";
+  private static final String baseUrl = "https://8r5xoyxj7y5c0ayoull0hi.z6.web.core.windows.net/";
+*/
+
   @Override  
   protected void onCreate(@Nullable Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
 		QuickSdk.Builder builder = QuickSdk.Builder.newInstance()  
-                .setAppId("00000000000-*******-......")  
+                .setAppId("00000000000-*******-......")  // if appId not provided, set null.
                 .maxRequestRetryCount(0).setLanguage("tr-TR")  
-                .setSettingsUrl(null)  
+                .setSettingsUrl(settingsUrl)  // set settings url, if not provied set null.
                 .setClientCustomFunctionTriggerListener(this)  
                 .timeOutRequestSeconds(60)  
                 .setBaseUrl(SuperAppUrlMap.BASE_URL.getUrl());  
@@ -126,16 +132,28 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
             break; 
             
             case "GetMailAddress":  
-            v8Object.add("Email", "sukru.karaman@softtech.com.tr");  
+            v8Object.add("Email", "email");  
             
             break;  
             case "GetPhoneNumber":  
-                v8Object.add("PhoneNumber", "905514141986");  
+                v8Object.add("PhoneNumber", "tel");  
             break;  
 	
         resultListener.onFunctionResult(v8Object);  
       
     }
+
+
+//Adding custom certificate
+
+QuickCertificate.Builder certificateBuilder = QuickCertificate.Builder.newQuickCertificate();
+       certificateBuilder.add("host","public key");
+
+//Adding certificate to quick sdk
+
+QuickSdk.Builder builder =
+QuickSdk.Builder.newInstance().setQuickCertificate(certificateBuilder.build()) 
+                
 
 
 
