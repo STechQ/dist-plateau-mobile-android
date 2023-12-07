@@ -107,7 +107,7 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
     @Override  
   public void onInitialized(QuickService quickService) {  
         quickService.injectActivity(this);  
-	quickService.startMiniApp();  
+	quickService.startRender(null);  
   }  
   
     @Override  
