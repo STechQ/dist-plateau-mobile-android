@@ -11,10 +11,16 @@
     implementation "com.softtech.quick.sdk:version"
 
     //Third party
+
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx.appcompatVersion"
+    implementation 'com.google.android.material:material:1.10.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    
     implementation 'com.facebook.soloader:soloader:0.10.4'
     implementation "com.airbnb.android:lottie:4.2.0"
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
+    implementation "com.google.dagger:dagger-android:2.27"
     implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
     implementation "io.reactivex.rxjava3:rxandroid:$rootProject.ext.rxAndroidVersion"
@@ -31,12 +37,18 @@
     implementation "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
     implementation 'com.jakewharton.rxbinding4:rxbinding-core:4.0.0'
     implementation "commons-codec:commons-codec:1.15"
-
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.logginginterceptorVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.27"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.27"
 
     def room_version = "2.4.0-alpha03"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    implementation 'com.google.firebase:firebase-analytics:17.4.1'
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+    implementation 'com.google.firebase:firebase-crashlytics'
 
 
  ***Maven:***
@@ -50,13 +62,14 @@
 ***Local:***
 
     dependencies {
-    	implementation files('../quickcomponents.aar')
-    	implementation files('../qcommon.aar')
-    	implementation files('../renderingfw.aar')
-    	implementation files('../networkfw.aar')
-    	implementation files('../quickbridge.aar')
-    	implementation files('../quickannotation.aar')
-    	implementation files('../quickmobileandroid.aar')
+    	implementation fileTree(dir: 'libs', include: ['*.jar'])
+     
+     	implementation(name:'quickcomponents-release', ext:'aar')
+    	implementation(name:'qcommon-release', ext:'aar')
+    	implementation(name:'renderingfw-release', ext:'aar')
+    	implementation(name:'networkfw-release', ext:'aar')
+    	implementation(name:'quickbridge-release', ext:'aar')
+    	implementation(name:'quickmobileandroid-release', ext:'aar')
     }
 
 **2. Software Requirements and Tools
