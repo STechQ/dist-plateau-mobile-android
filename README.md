@@ -131,31 +131,57 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
 
 
     @Override  
-  public void callFunction(String functionName, QV8Element params, QuickService.FunctionCallBackListener resultListener) {  
+  public boolean callFunction(String functionName, QV8Element params, QuickService.FunctionCallBackListener resultListener) {  
      QV8Object v8Object = new QV8Object();
+     QV8Object resultData = new QV8Object();
 
 //To add primitive type, use QV8Primitive(new QV8Primitive(true),new QV8Primitive(2),new QV8Primitive("string")).
 //To add map type, use QV8Object (object = new QV8Object(),object.add("key",string|boolean,integer,float,QV8Primitive,QV8Array,QV8Object)).
 //To add array type, use QV8Array (array = new QV8Array(),array.add(string|boolean,integer,float,QV8Primitive,QV8Array,QV8Object)).
 
      switch (functionName) {  
-            case "GetIdentity":  
-            v8Object.add("TCKN", "11111111118");  
-            v8Object.add("Name", "Şükrü");  
-            v8Object.add("Surname", "Karamann");  
-            break; 
+          	  case "GetIdentity":  
+          	  v8Object.add("TCKN", "11111111118");  
+          	  v8Object.add("Name", "Şükrü");  
+          	  v8Object.add("Surname", "Karamann");
+	  	  handled = true;  
+         	   break; 
             
             case "GetMailAddress":  
-            v8Object.add("Email", "email");  
-            
-            break;  
+           	 v8Object.add("Email", "email");
+	   	 handled = true;  
+           	 break;
+	  
             case "GetPhoneNumber":  
-                v8Object.add("PhoneNumber", "tel");  
-            break;  
+	    	v8Object.add("PhoneNumber", "tel");
+	   	 handled = true;
+           	 break;
+
+	    case "GetToken":
+                v8Object.add("token", "your_token");
+                resultData.add("isSuccess", true);
+                resultData.add("retVal", v8Object);
+                handled = true;
+                break;
+
+            case "GetUserInfo":
+                v8Object.add("UserNameSurname", "your_usernamesurname");
+                v8Object.add("SicilNo", "your_sicilNo");
+                resultData.add("isSuccess", true);
+                resultData.add("retVal", v8Object);
+                handled = true;
+                break;
+
+	   default:
+                Log.e("DefaultCase", "Default Case");
 	
-        resultListener.onFunctionResult(v8Object);  
+        if (handled) {
+            resultListener.onFunctionResult(resultData);
+        }
+	return handled;  
       
     }
+
 
 
 //Adding custom certificate
