@@ -12,44 +12,70 @@
 
     //Third party
 
-    implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx.appcompatVersion"
-    implementation 'com.google.android.material:material:1.10.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation deps.appcompat
+    implementation deps.material
+    implementation deps.kotlinStdLib
+    implementation deps.cardview
+    implementation deps.constraintLayout
+    implementation deps.glide
+    implementation deps.okhttp3Integration
+    implementation deps.places
+    implementation deps.webSocket
+    implementation deps.moshi
+    implementation deps.moshiKotlin
+    implementation deps.bartekscPdf
+    implementation deps.prdownloader
+    implementation deps.MPAndroidChart
+    implementation deps.imageCropper
+    implementation deps.playMlKitBarcodeScanning
+    implementation deps.yogaLayout
+    implementation deps.cameraX
+    implementation deps.cameraXLifecycle
+    implementation deps.cameraXView
+    implementation deps.rxBinding
+    implementation deps.cameraXMlKitVision
+    implementation deps.commonsLang
+    implementation deps.dagger
+    implementation deps.lifecycle_common_java8
+    implementation deps.livedata_ktx
+    implementation deps.retrofit
+    implementation deps.retrofitGsonConverter
+    implementation deps.loggingInterceptor
+    implementation deps.okHttp
+    implementation deps.conscrypt
+    implementation deps.rxAndroid
+    implementation deps.adapterRxJava3
+    implementation deps.retrofitScalarsConverter
+    implementation deps.firebaseCrashlytics
+    implementation deps.gson
+    implementation deps.timber
+    implementation deps.soLoader
+    implementation deps.beanutils
+    implementation deps.commonsIO
+    implementation deps.permissionsDispatcher
+    implementation deps.recyclerview
+    implementation deps.activity
+    implementation deps.lottie
+    implementation deps.encryptedSharedPreferences
+    implementation deps.javaxInject
+    implementation deps.fragment
+    implementation deps.codec
+    implementation deps.room
+    implementation deps.svg
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.23'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
     
-    implementation 'com.facebook.soloader:soloader:0.10.4'
-    implementation "com.airbnb.android:lottie:4.2.0"
-    implementation "com.google.dagger:dagger-android:2.27"
-    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
-    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.ext.rxAndroidVersion"
-    implementation "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava3:$rootProject.ext.retrofitVersion"
-    implementation "com.jakewharton.timber:timber:$rootProject.ext.timberVersion"
-    implementation 'org.conscrypt:conscrypt-android:2.2.1'
-    implementation "com.squareup.okhttp3:okhttp:4.9.3"
-    implementation "commons-beanutils:commons-beanutils:$rootProject.ext.apacheCommons.beanutilsVersion"
-    implementation "org.apache.commons:commons-lang3:$rootProject.ext.apacheCommons.commonslangVersion"
-    implementation "com.eclipsesource.j2v8:j2v8:6.2.1@aar"
-    implementation 'com.facebook.yoga:yoga-layout:2.0.0'
-
-    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
-    implementation 'com.jakewharton.rxbinding4:rxbinding-core:4.0.0'
-    implementation "commons-codec:commons-codec:1.15"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.logginginterceptorVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:2.27"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.27"
-
-    def room_version = "2.4.0-alpha03"
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-
-    implementation 'com.google.firebase:firebase-analytics:17.4.1'
-    implementation platform('com.google.firebase:firebase-bom:32.1.0')
-    implementation 'com.google.firebase:firebase-crashlytics'
-
+    annotationProcessor deps.permissionsDispatcherProcessor
+    annotationProcessor deps.daggerCompiler
+    annotationProcessor deps.daggerProcessors
+    annotationProcessor deps.glideCompiler
+    annotationProcessor deps.roomCompiler
+    
+    kapt deps.daggerCompiler
+    kapt deps.daggerProcessors
+    kapt deps.roomCompiler
+    
+    coreLibraryDesugaring deps.desugar
 
  ***Maven:***
 
