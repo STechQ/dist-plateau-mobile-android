@@ -208,6 +208,18 @@ public class SampleActivity extends AppCompatActivity implements QuickService.As
       
     }
 
+    @Override
+    public void onBackPressed() {
+        quickService.handleBack().subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean handled) throws Throwable {
+                if(!handled){
+                    SampleActivity.super.onBackPressed();
+                }
+            }
+        });
+    }
+
 
 
 //Adding custom certificate
