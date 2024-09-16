@@ -1,0 +1,162 @@
+ext {
+    // SDK and Tool Versions
+    compileSdkVersion = 34
+    buildToolVersion = "30.0.3"
+    buildGradleVersion = "4.1.0"
+    minSdkVersion = 23
+    targetSdkVersion = 34
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    desugarVersion = "1.1.5"
+
+    // App Versions
+    quickVersionCode = 45
+    quickVersionName = "1.4.4"
+
+    // Common Library Versions
+    androidxVersion = "1.2.0"
+    lifecycleVersion = "2.3.1"
+    daggerVersion = "2.27"
+    retrofitOkHttpVersion = "2.9.0"
+    okhttpVersion = "4.9.3"
+    rxAndroidVersion = "3.0.0"
+    glideVersion = "4.14.2"
+    gsonVersion = "2.8.6"
+    permissionDispatcher = "4.8.0"
+    playServicesMapsVersion = "18.2.0"
+    moshi = "1.9.2"
+    roomVersion = "2.4.2"
+    cameraxVersion = "1.2.0"
+
+
+    kotlin = [
+            "kotlinGradlePluginVersion": "1.6.0",
+            "stlibVersion"             : "1.4.10"
+    ]
+
+    // Dependencies
+    deps = [
+            // AndroidX and UI
+            annotation                    : "androidx.annotation:annotation:$androidxVersion",
+            recyclerview                  : "androidx.recyclerview:recyclerview:1.1.0",
+            constraintLayout              : "androidx.constraintlayout:constraintlayout:2.0.4",
+            viewpager                     : "androidx.viewpager:viewpager:1.0.0",
+            viewpager2                    : "androidx.viewpager2:viewpager2:1.0.0",
+            livedata_ktx                  : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
+            core_ktx                      : "androidx.core:core-ktx:$androidxVersion",
+            fragment                      : "androidx.fragment:fragment:1.3.0",
+            fragment_ktx                  : "androidx.fragment:fragment-ktx:1.3.0",
+
+            coordinatorX                   : "androidx.coordinatorlayout:coordinatorlayout:1.2.0",
+            appcompat                     : "androidx.appcompat:appcompat:$androidxVersion",
+            cardview                      : "androidx.cardview:cardview:1.0.0",
+            activity                      : "androidx.activity:activity:1.2.4",
+            core                          : "androidx.core:core:1.3.2",
+            runtime_ktx                   : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
+            viewmodel_ktx                 : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
+            lifecycle_common_java8        : "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion",
+            lifecycle_runtime_ktx         : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
+
+            lifecycle_common              : "androidx.lifecycle:lifecycle-common:$lifecycleVersion",
+
+            material                      : "com.google.android.material:material:1.4.0",
+            cameraX                       : "androidx.camera:camera-camera2:$cameraxVersion",
+            cameraXLifecycle              : "androidx.camera:camera-lifecycle:$cameraxVersion",
+            cameraXView                   : "androidx.camera:camera-view:$cameraxVersion",
+            cameraXMlKitVision            : "androidx.camera:camera-mlkit-vision:1.2.0-beta02",
+
+            // Kotlin
+            kotlinStdLib                  : "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlin.kotlinGradlePluginVersion",
+            kotlinBom                     : "org.jetbrains.kotlin:kotlin-bom:1.6.0",
+
+            // Testing
+            androidTest                   : "androidx.test:core:1.2.0",
+            androidTestJunit              : "androidx.test.ext:junit:1.1.1",
+            espresso                      : "androidx.test.espresso:espresso-core:3.3.0",
+            jUnit                         : "junit:junit:4.12",
+            uiAutomatorTest               : "androidx.test.uiautomator:uiautomator:2.2.0",
+            bencmarkMacroTest             : "androidx.benchmark:benchmark-macro-junit4:1.1.0",
+            androidTestRule               : "androidx.test:rules:1.5.0",
+
+            // Networking and Serialization
+            dagger                        : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler                : "com.google.dagger:dagger-compiler:$daggerVersion",
+            daggerProcessors              : "com.google.dagger:dagger-android-processor:$daggerVersion",
+            gson                          : "com.google.code.gson:gson:$gsonVersion",
+            retrofit                      : "com.squareup.retrofit2:retrofit:$retrofitOkHttpVersion",
+            retrofitGsonConverter         : "com.squareup.retrofit2:converter-gson:$retrofitOkHttpVersion",
+            retrofitScalarsConverter      : "com.squareup.retrofit2:converter-scalars:$retrofitOkHttpVersion",
+            adapterRxJava3                : "com.squareup.retrofit2:adapter-rxjava3:$retrofitOkHttpVersion",
+            loggingInterceptor            : "com.squareup.okhttp3:logging-interceptor:$okhttpVersion",
+            okHttp                        : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+            conscrypt                     : "org.conscrypt:conscrypt-android:2.2.1",
+            okhttp3Integration            : 'com.github.bumptech.glide:okhttp3-integration:4.4.0',
+
+            // Asynchronous Programming
+            rxAndroid                     : "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion",
+
+            // Google Services
+            playServicesMaps              : "com.google.android.gms:play-services-maps:$playServicesMapsVersion",
+            playServicesLocation          : "com.google.android.gms:play-services-location:$playServicesMapsVersion",
+            places                        : 'com.google.android.libraries.places:places:3.2.0',
+            playMlKitBarcodeScanning      : 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0',
+
+            // Utilities
+            timber                        : "com.jakewharton.timber:timber:4.7.1",
+            commonsIO                     : "commons-io:commons-io:2.6",
+            permissionsDispatcher         : "com.github.permissions-dispatcher:permissionsdispatcher:$permissionDispatcher",
+            permissionsDispatcherProcessor: "com.github.permissions-dispatcher:permissionsdispatcher-processor:$permissionDispatcher",
+            prdownloader                  : 'com.mindorks.android:prdownloader:0.6.0',
+            MPAndroidChart                : 'com.github.PhilJay:MPAndroidChart:v3.1.0',
+            imageCropper                  : 'com.theartofdev.edmodo:android-image-cropper:2.8.0',
+            rxBinding                     : 'com.jakewharton.rxbinding4:rxbinding-core:4.0.0',
+
+            // Apache Commons Libraries
+            beanutils                     : "commons-beanutils:commons-beanutils:1.9.4",
+            commonsLang                   : "org.apache.commons:commons-lang3:3.11",
+            codec                         : "commons-codec:commons-codec:1.15",
+
+            // Glide for Image Loading
+            glide                         : "com.github.bumptech.glide:glide:$glideVersion",
+            glideCompiler                 : "com.github.bumptech.glide:compiler:$glideVersion",
+
+            // Data Binding
+            databindingCompiler           : "androidx.databinding:databinding-compiler:$buildGradleVersion",
+
+            //Firebase
+            firebaseCrashlytics           : "com.google.firebase:firebase-crashlytics:18.3.7",
+
+            //SoLoader
+            soLoader                      : "com.facebook.soloader:soloader:0.10.1",
+            yogaLayout                    : "com.facebook.yoga.android:yoga-layout:1.19.0",
+
+            //Desugar
+            desugar                       : "com.android.tools:desugar_jdk_libs:$desugarVersion",
+
+            //Wocket
+            webSocket                     : "org.java-websocket:Java-WebSocket:1.5.1",
+
+            //Moshi
+            moshi                         : "com.squareup.moshi:moshi:$moshi",
+            moshiKotlin                   : "com.squareup.moshi:moshi-kotlin-codegen:$moshi",
+
+            //Pdf Viewer
+            bartekscPdf                   : 'com.github.barteksc:android-pdf-viewer:2.8.2',
+
+            //JavaX
+            javaxInject                   : 'javax.inject:javax.inject:1',
+
+            //Lottie
+            lottie                        : "com.airbnb.android:lottie:4.2.0",
+
+            // AndroidX Security Crypto kütüphanesi
+            encryptedSharedPreferences    : 'androidx.security:security-crypto:1.1.0-alpha03',
+
+            // Room
+            room                          : "androidx.room:room-runtime:$roomVersion",
+            roomCompiler                  : "androidx.room:room-compiler:$roomVersion",
+
+            // Android Svg
+            svg                           : 'com.caverock:androidsvg-aar:1.4'
+    ]
+}
