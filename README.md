@@ -62,6 +62,7 @@
     implementation deps.codec
     implementation deps.room
     implementation deps.svg
+    implementation "com.eclipsesource.j2v8:j2v8:6.2.1@aar"
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.23'
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
     
