@@ -1,0 +1,64 @@
+// Plateau Mobile SDK Files
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation (files("libs/quickcomponents-release.aar"))
+    implementation (files("libs/qcommon-release.aar"))
+    implementation (files("libs/renderingfw-release.aar"))
+    implementation (files("libs/networkfw-release.aar"))
+    implementation (files("libs/quickbridge-release.aar"))
+    implementation (files("libs/quickmobileandroid-release.aar"))
+    implementation (files("libs/shared-release.aar"))
+    implementation (files("libs/quick-initializer-release.aar"))
+    implementation (files("libs/web-bridge-release.aar"))
+
+    // Optional
+    // implementation (files("libs/QAuth-release.aar"))
+
+    // Third Party Libraries
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.activity:activity:1.8.0'
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation 'com.google.android.material:material:1.10.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation 'com.facebook.soloader:soloader:0.10.4'
+    implementation "com.airbnb.android:lottie:4.2.0"
+    implementation "com.google.dagger:dagger-android:2.35.1"
+    implementation "com.google.code.gson:gson:2.8.6"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
+    implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:2.9.0"
+    implementation "com.jakewharton.timber:timber:4.7.1"
+    implementation 'org.conscrypt:conscrypt-android:2.2.1'
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+    implementation "commons-beanutils:commons-beanutils:1.9.4"
+    implementation "org.apache.commons:commons-lang3:3.11"
+    implementation "com.eclipsesource.j2v8:j2v8:6.2.1@aar"
+    implementation 'com.facebook.yoga:yoga-layout:2.0.0'
+
+    implementation "com.github.bumptech.glide:glide:4.14.2"
+    implementation 'com.jakewharton.rxbinding4:rxbinding-core:4.0.0'
+    implementation "commons-codec:commons-codec:1.15"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.14.2"
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.27"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.27"
+
+    implementation "androidx.room:room-runtime:2.4.0-alpha03"
+    annotationProcessor "androidx.room:room-compiler:2.4.0-alpha03"
+
+    implementation 'com.google.firebase:firebase-analytics:17.4.1'
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+    implementation 'com.google.firebase:firebase-crashlytics'
+
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation 'androidx.security:security-crypto:1.1.0-alpha03'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Optional
+    //implementation 'net.openid:appauth:0.11.1'
+    //implementation 'com.auth0.android:jwtdecode:2.0.0'
