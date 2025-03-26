@@ -2,6 +2,8 @@
 
 **Transfer your Low Code development with Plateau Studio to the Android platform in a few steps with Plateau Super SDK implementation.**
 
+⚠️ **Warning:** *If you are going to integrate Plateau Android SDK, please read README!*
+
 **#`Start`**
 
 ****1.Dependencies**　
