@@ -1,3 +1,6 @@
+// Please ignore the libraries and their versions here for a while.
+// Use the libraries in QLibraries under the requiredLibraries package.
+
 ext {
     // SDK and Tool Versions
     compileSdkVersion = 34
