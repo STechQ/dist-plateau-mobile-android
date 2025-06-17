@@ -23,7 +23,7 @@
 *Libraries*
 
     // Plateau Mobile SDK Files
-    implementation 'com.softtech.quick.sdk:plateausdk:7.3.0-alpha.1'
+    implementation 'com.softtech.quick.sdk:plateausdk:7.3.0-alpha.32'
 
 **2. Software Requirements and Tools IDE: Android Studio  Lang: Java,Kotlin**
 
