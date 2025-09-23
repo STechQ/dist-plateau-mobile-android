@@ -23,7 +23,104 @@
 *Libraries*
 
     // Plateau Mobile SDK Files
-    implementation 'com.softtech.quick.sdk:plateausdk:7.3.0-alpha.32'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation (files("libs/quickcomponents-release.aar"))
+    implementation (files("libs/qcommon-release.aar"))
+    implementation (files("libs/renderingfw-release.aar"))
+    implementation (files("libs/networkfw-release.aar"))
+    implementation (files("libs/quickbridge-release.aar"))
+    implementation (files("libs/quickmobileandroid-release.aar"))
+    implementation (files("libs/shared-release.aar"))
+    implementation (files("libs/quick-initializer-release.aar"))
+    implementation (files("libs/web-bridge-release.aar"))
+
+    // Optional
+    // implementation (files("libs/QAuth-release.aar"))
+
+    // Third Party Libraries
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.activity:activity:1.2.4'
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation 'com.google.android.material:material:1.4.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation 'com.facebook.soloader:soloader:0.12.1'
+    implementation "com.airbnb.android:lottie:4.2.0"
+    implementation "com.google.dagger:dagger-android:2.27"
+    implementation "com.google.code.gson:gson:2.8.6"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
+    implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:2.9.0"
+    implementation 'org.conscrypt:conscrypt-android:2.5.3'
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+    implementation "commons-beanutils:commons-beanutils:1.9.4"
+    implementation "org.apache.commons:commons-lang3:3.11"
+    implementation "com.github.ynab:j2v8:6.2.1-16kb.2"
+    implementation "com.facebook.yoga:yoga:3.2.1"
+
+    implementation "com.github.bumptech.glide:glide:4.14.2"
+    implementation 'com.jakewharton.rxbinding4:rxbinding-core:4.0.0'
+    implementation "commons-codec:commons-codec:1.15"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.14.2"
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.27"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.27"
+
+    implementation "androidx.room:room-runtime:2.4.2"
+    annotationProcessor "androidx.room:room-compiler:2.4.2"
+
+    implementation 'com.google.firebase:firebase-analytics:17.4.1'
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+    implementation 'com.google.firebase:firebase-crashlytics:18.3.7'
+
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation 'androidx.security:security-crypto:1.1.0-alpha03'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1",
+    implementation "androidx.fragment:fragment:1.3.0"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.core:core:1.3.2"
+    implementation "androidx.camera:camera-camera2:1.4.2"
+    implementation "androidx.camera:camera-lifecycle:1.4.2"
+    implementation "androidx.camera:camera-view:1.4.2"
+    implementation "androidx.camera:camera-mlkit-vision:1.4.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
+    implementation "com.google.dagger:dagger:2.27"
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.4.0'
+    implementation 'com.google.android.libraries.places:places:3.2.0'
+    implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0'
+    implementation "com.google.android.gms:play-services-auth:20.6.0"
+    implementation "commons-io:commons-io:2.6"
+    implementation "com.github.permissions-dispatcher:permissionsdispatcher:4.8.0"
+    implementation "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.8.0"
+    implementation 'com.github.amitshekhariitbhu:PRDownloader:1.0.2'
+    implementation 'com.vanniktech:android-image-cropper:4.3.3'
+    implementation "org.java-websocket:Java-WebSocket:1.5.1"
+    implementation "com.squareup.moshi:moshi:1.9.2"
+    implementation "com.squareup.moshi:moshi-kotlin-codegen:1.9.2"
+    implementation 'com.github.marain87:AndroidPdfViewer:3.2.8'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'com.caverock:androidsvg-aar:1.4'
+
+    // Huawei Libraries
+    implementation "com.huawei.hms:maps:6.11.0.304"
+    implementation "com.huawei.hms:location:6.16.0.302"
+    implementation "com.huawei.hms:scan:2.12.0.301"
+    implementation "com.huawei.agconnect:agconnect-core:1.9.1.304"
+    implementation "com.huawei.agconnect:agconnect-appmessaging:1.9.1.304"
+
+    // Optional
+    //implementation 'net.openid:appauth:0.11.1'
+    //implementation 'com.auth0.android:jwtdecode:2.0.0'
 
 **2. Software Requirements and Tools IDE: Android Studio  Lang: Java,Kotlin**
 
@@ -32,10 +129,10 @@
 class MainActivity :
     AppCompatActivity(),
     QuickService.AsyncInitialListener,
-    ScreenNavController,
+    ActivityController,
     QuickService.LoadingJsonServiceListener,
     QuickService.QuickCallBackListener,
-    QuickService.QuickActivityController{
+    QuickService.QuickActivityController {
 
     private var baseUrl = "https://otogb7m8y8f23d18ym35w7.z6.web.core.windows.net/"
     private var settingsUrl = "settings/settings_mobile.json"
@@ -53,9 +150,12 @@ class MainActivity :
     }
 
     private fun initQuickService() {
-        // If you want to add a certificate, you should add it like this and use setQuickCertificate
-        //val certificateBuilder = QuickCertificate.Builder.newQuickCertificate()
-        //certificateBuilder.add("host", "public_key")
+        // If you want to add a certificate, you should add it like this and use addSslPinningConfig
+        /*val sslPinningConfig = DefaultSslPinningConfig.Builder()
+            .withSslPemFile("sslPemFile")
+            .withDomain("domain")
+            .withCertificateId("certificateId")
+            .build()*/
 
         SoLoader.init(androidApplication, false)
 
@@ -66,7 +166,7 @@ class MainActivity :
             .maxRequestRetryCount(0)
             .timeOutRequestSeconds(60)
             .setDeepLinkParameters(null)
-            //.setQuickCertificate(certificateBuilder.build())
+            //.addSslPinningConfig(sslPinningConfig)
             .setClientCustomFunctionTriggerListener(this)
             .setPlatFormInfo(QPlatform(baseContext).platFormInfo)
             .setBaseUrl(baseUrl)
@@ -76,17 +176,53 @@ class MainActivity :
     }
 
     // Required for page transition
-    override fun onQuickFragmentCreated(p0: Boolean, p1: QFragment, p2: String) {
-        if (!isFinishing) {
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.addToBackStack(p2)
+    override fun onQuickFragmentCreated(addToBackStack: Boolean, fragment: QFragment, tag: String) {
+        onQuickFragmentCreatedWithAnimation(addToBackStack, fragment, tag, null)
+    }
 
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).add(
-                R.id.q_content_fragment_layout, p1,
-                p2
-            )
+    override fun onQuickFragmentCreatedWithAnimation(
+        addToBackStack: Boolean,
+        fragment: QFragment,
+        tag: String?,
+        pageTransitionAnimation: Animation?
+    ) {
+        if (!isFinishing()) {
+            val fragmentTransaction: FragmentTransaction =
+                getSupportFragmentManager().beginTransaction()
 
-            if (!p1.isStateSaved()) {
+            if (pageTransitionAnimation != null) {
+                if (pageTransitionAnimation.isInAnimation()) {
+                    fragmentTransaction.setCustomAnimations(
+                        pageTransitionAnimation.getEnterAnim(),
+                        0,
+                        pageTransitionAnimation.getExitAnim(),
+                        0
+                    )
+                } else {
+                    fragmentTransaction.setCustomAnimations(
+                        pageTransitionAnimation.getExitAnim(),
+                        0,
+                        pageTransitionAnimation.getEnterAnim(),
+                        0
+                    )
+                }
+            }
+
+            val fragmentsSize: Int = getSupportFragmentManager().getFragments().size()
+
+            if (fragmentsSize > 0) {
+                val currentFragment: Fragment =
+                    getSupportFragmentManager().getFragments().get(fragmentsSize - 1)
+
+                if (currentFragment is QFragment) {
+                    fragmentTransaction.hide(currentFragment)
+                }
+            }
+
+            fragmentTransaction.addToBackStack(tag)
+            fragmentTransaction.add(R.id.q_content_fragment_layout, fragment, tag)
+
+            if (!fragment.isStateSaved()) {
                 fragmentTransaction.commit()
             } else {
                 fragmentTransaction.commitAllowingStateLoss()
@@ -100,10 +236,8 @@ class MainActivity :
 
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-        quickService!!.handleBack().subscribe { handled ->
-            if (!handled) {
-                super@MainActivity.onBackPressed()
-            }
+        quickService!!.handleBack().subscribe {
+            // no opt
         }
     }
 
@@ -138,7 +272,7 @@ class MainActivity :
 
         when (functionName) {
             "GetToken" -> {
-                v8Object.add("token","123456789")
+                v8Object.add("token", "123456789")
                 handled = true
             }
 
@@ -214,7 +348,7 @@ class MainActivity :
         // no opt
     }
 
-    override fun goNativePage(p0: String?, p1: MutableMap<String, Any>?, p2: String?) {
+    override fun goNativePage(p0: String?, p1: MutableMap<String, Any>?, p2: Animation?) {
         // no opt
     }
 
@@ -222,6 +356,14 @@ class MainActivity :
         // no-opt
     }
 
+    override fun setLoadingUrl(loadingUrl: String?) {
+        // no-opt
+    }
+
+    override fun setLoadingJson(loadingJson: String?) {
+        // no-opt
+    }
+    
     override fun addNavigationComponent(component: QBaseComponent<*>?) {
         // no-opt
     }
