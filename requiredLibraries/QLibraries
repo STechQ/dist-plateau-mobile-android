@@ -15,30 +15,29 @@
     // implementation (files("libs/QAuth-release.aar"))
 
     // Third Party Libraries
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.activity:activity:1.8.0'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.activity:activity:1.2.4'
     implementation "androidx.appcompat:appcompat:1.2.0"
-    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'com.google.android.material:material:1.4.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation 'com.facebook.soloader:soloader:0.10.4'
+    implementation 'com.facebook.soloader:soloader:0.12.1'
     implementation "com.airbnb.android:lottie:4.2.0"
-    implementation "com.google.dagger:dagger-android:2.35.1"
+    implementation "com.google.dagger:dagger-android:2.27"
     implementation "com.google.code.gson:gson:2.8.6"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
     implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
     implementation "com.squareup.retrofit2:adapter-rxjava3:2.9.0"
-    implementation "com.jakewharton.timber:timber:4.7.1"
-    implementation 'org.conscrypt:conscrypt-android:2.2.1'
+    implementation 'org.conscrypt:conscrypt-android:2.5.3'
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
     implementation "commons-beanutils:commons-beanutils:1.9.4"
     implementation "org.apache.commons:commons-lang3:3.11"
-    implementation "com.eclipsesource.j2v8:j2v8:6.2.1@aar"
-    implementation 'com.facebook.yoga:yoga-layout:2.0.0'
+    implementation "com.github.ynab:j2v8:6.2.1-16kb.2"
+    implementation "com.facebook.yoga:yoga:3.2.1"
 
     implementation "com.github.bumptech.glide:glide:4.14.2"
     implementation 'com.jakewharton.rxbinding4:rxbinding-core:4.0.0'
@@ -48,16 +47,52 @@
     annotationProcessor "com.google.dagger:dagger-android-processor:2.27"
     annotationProcessor "com.google.dagger:dagger-compiler:2.27"
 
-    implementation "androidx.room:room-runtime:2.4.0-alpha03"
-    annotationProcessor "androidx.room:room-compiler:2.4.0-alpha03"
+    implementation "androidx.room:room-runtime:2.4.2"
+    annotationProcessor "androidx.room:room-compiler:2.4.2"
 
     implementation 'com.google.firebase:firebase-analytics:17.4.1'
     implementation platform('com.google.firebase:firebase-bom:32.1.0')
-    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-crashlytics:18.3.7'
 
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation 'androidx.security:security-crypto:1.1.0-alpha03'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1",
+    implementation "androidx.fragment:fragment:1.3.0"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.core:core:1.3.2"
+    implementation "androidx.camera:camera-camera2:1.4.2"
+    implementation "androidx.camera:camera-lifecycle:1.4.2"
+    implementation "androidx.camera:camera-view:1.4.2"
+    implementation "androidx.camera:camera-mlkit-vision:1.4.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
+    implementation "com.google.dagger:dagger:2.27"
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.4.0'
+    implementation 'com.google.android.libraries.places:places:3.2.0'
+    implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0'
+    implementation "com.google.android.gms:play-services-auth:20.6.0"
+    implementation "commons-io:commons-io:2.6"
+    implementation "com.github.permissions-dispatcher:permissionsdispatcher:4.8.0"
+    implementation "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.8.0"
+    implementation 'com.github.amitshekhariitbhu:PRDownloader:1.0.2'
+    implementation 'com.vanniktech:android-image-cropper:4.3.3'
+    implementation "org.java-websocket:Java-WebSocket:1.5.1"
+    implementation "com.squareup.moshi:moshi:1.9.2"
+    implementation "com.squareup.moshi:moshi-kotlin-codegen:1.9.2"
+    implementation 'com.github.marain87:AndroidPdfViewer:3.2.8'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'com.caverock:androidsvg-aar:1.4'
+
+    // Huawei Libraries
+    implementation "com.huawei.hms:maps:6.11.0.304"
+    implementation "com.huawei.hms:location:6.16.0.302"
+    implementation "com.huawei.hms:scan:2.12.0.301"
+    implementation "com.huawei.agconnect:agconnect-core:1.9.1.304"
+    implementation "com.huawei.agconnect:agconnect-appmessaging:1.9.1.304"
 
     // Optional
     //implementation 'net.openid:appauth:0.11.1'

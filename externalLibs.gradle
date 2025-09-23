@@ -8,13 +8,18 @@ ext {
     buildGradleVersion = "4.1.0"
     minSdkVersion = 23
     targetSdkVersion = 34
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    superAppsTargetSdkVersion = 35
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
     desugarVersion = "1.1.5"
 
     // App Versions
     quickVersionCode = 45
     quickVersionName = "1.4.4"
+    studioAppsVersionCode = 4
+    studioAppsVersionName = "1.0.3"
+    utilsVersionCode = 1
+    utilsVersionName = "1.0.0"
 
     // Common Library Versions
     androidxVersion = "1.2.0"
@@ -27,14 +32,24 @@ ext {
     gsonVersion = "2.8.6"
     permissionDispatcher = "4.8.0"
     playServicesMapsVersion = "18.2.0"
+    googlePlayServicesAuthVersion = "20.6.0"
+    googlePlayServicesAuthApiPhoneVersion = "18.0.1"
     moshi = "1.9.2"
     roomVersion = "2.4.2"
-    cameraxVersion = "1.2.0"
 
+    cameraxVersion = "1.4.2"
+
+    //Huawei Libs
+    hmsMaps = "6.11.0.304"
+    hmsLocation = "6.16.0.302"
+    hmsScan = "2.12.0.301"
+    agConnectCore = "1.9.1.304"
+    agConnectMessaging = "1.9.1.304"
+    hmsHwId = "6.12.0.300"
 
     kotlin = [
-            "kotlinGradlePluginVersion": "1.6.0",
-            "stlibVersion"             : "1.4.10"
+            "kotlinGradlePluginVersion": "1.8.0",
+            "stlibVersion"             : "1.8.0"
     ]
 
     // Dependencies
@@ -66,25 +81,28 @@ ext {
             cameraX                       : "androidx.camera:camera-camera2:$cameraxVersion",
             cameraXLifecycle              : "androidx.camera:camera-lifecycle:$cameraxVersion",
             cameraXView                   : "androidx.camera:camera-view:$cameraxVersion",
-            cameraXMlKitVision            : "androidx.camera:camera-mlkit-vision:1.2.0-beta02",
+            cameraXMlKitVision            : "androidx.camera:camera-mlkit-vision:$cameraxVersion",
 
             // Kotlin
             kotlinStdLib                  : "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlin.kotlinGradlePluginVersion",
-            kotlinBom                     : "org.jetbrains.kotlin:kotlin-bom:1.6.0",
+            kotlinBom                     : "org.jetbrains.kotlin:kotlin-bom:$rootProject.ext.kotlin.kotlinGradlePluginVersion",
 
             // Testing
-            androidTest                   : "androidx.test:core:1.2.0",
+            androidTest                   : "androidx.test:core:1.5.0",
             androidTestJunit              : "androidx.test.ext:junit:1.1.1",
             espresso                      : "androidx.test.espresso:espresso-core:3.3.0",
             jUnit                         : "junit:junit:4.12",
             uiAutomatorTest               : "androidx.test.uiautomator:uiautomator:2.2.0",
             bencmarkMacroTest             : "androidx.benchmark:benchmark-macro-junit4:1.1.0",
             androidTestRule               : "androidx.test:rules:1.5.0",
+            robolectric                   : "org.robolectric:robolectric:4.11.1",
 
             // Networking and Serialization
             dagger                        : "com.google.dagger:dagger:$daggerVersion",
             daggerCompiler                : "com.google.dagger:dagger-compiler:$daggerVersion",
             daggerProcessors              : "com.google.dagger:dagger-android-processor:$daggerVersion",
+            daggerAndroid                 : "com.google.dagger:dagger-android:$daggerVersion",
+
             gson                          : "com.google.code.gson:gson:$gsonVersion",
             retrofit                      : "com.squareup.retrofit2:retrofit:$retrofitOkHttpVersion",
             retrofitGsonConverter         : "com.squareup.retrofit2:converter-gson:$retrofitOkHttpVersion",
@@ -92,7 +110,7 @@ ext {
             adapterRxJava3                : "com.squareup.retrofit2:adapter-rxjava3:$retrofitOkHttpVersion",
             loggingInterceptor            : "com.squareup.okhttp3:logging-interceptor:$okhttpVersion",
             okHttp                        : "com.squareup.okhttp3:okhttp:$okhttpVersion",
-            conscrypt                     : "org.conscrypt:conscrypt-android:2.2.1",
+            conscrypt                     : "org.conscrypt:conscrypt-android:2.5.3",
             okhttp3Integration            : 'com.github.bumptech.glide:okhttp3-integration:4.4.0',
 
             // Asynchronous Programming
@@ -103,15 +121,25 @@ ext {
             playServicesLocation          : "com.google.android.gms:play-services-location:$playServicesMapsVersion",
             places                        : 'com.google.android.libraries.places:places:3.2.0',
             playMlKitBarcodeScanning      : 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0',
+            googlePlayServicesAuth        : "com.google.android.gms:play-services-auth:$googlePlayServicesAuthVersion",
+            googlePlayServicesAuthApiPhone: "com.google.android.gms:play-services-auth:$googlePlayServicesAuthApiPhoneVersion",
+
+            //Huawei Services
+            huaweiServicesMaps              : "com.huawei.hms:maps:$hmsMaps",
+            huaweiServicesLocation          : "com.huawei.hms:location:$hmsLocation",
+            huaweiServicesScan              : "com.huawei.hms:scan:$hmsScan",
+            huaweiAgConnectCore             : "com.huawei.agconnect:agconnect-core:$agConnectCore",
+            huaweiServicesAgConnectMessaging             : "com.huawei.agconnect:agconnect-appmessaging:$agConnectMessaging",
+            huaweiServicesHwId            : "com.huawei.hms:hwid:$hmsHwId",
+
 
             // Utilities
-            timber                        : "com.jakewharton.timber:timber:4.7.1",
             commonsIO                     : "commons-io:commons-io:2.6",
             permissionsDispatcher         : "com.github.permissions-dispatcher:permissionsdispatcher:$permissionDispatcher",
             permissionsDispatcherProcessor: "com.github.permissions-dispatcher:permissionsdispatcher-processor:$permissionDispatcher",
-            prdownloader                  : 'com.mindorks.android:prdownloader:0.6.0',
+            prdownloader                  : 'com.github.amitshekhariitbhu:PRDownloader:1.0.2',
             MPAndroidChart                : 'com.github.PhilJay:MPAndroidChart:v3.1.0',
-            imageCropper                  : 'com.theartofdev.edmodo:android-image-cropper:2.8.0',
+            imageCropper                  : 'com.vanniktech:android-image-cropper:4.3.3',
             rxBinding                     : 'com.jakewharton.rxbinding4:rxbinding-core:4.0.0',
 
             // Apache Commons Libraries
@@ -130,8 +158,8 @@ ext {
             firebaseCrashlytics           : "com.google.firebase:firebase-crashlytics:18.3.7",
 
             //SoLoader
-            soLoader                      : "com.facebook.soloader:soloader:0.10.1",
-            yogaLayout                    : "com.facebook.yoga.android:yoga-layout:1.19.0",
+            soLoader                      : "com.facebook.soloader:soloader:0.12.1",
+            yogaLayout                    : "com.facebook.yoga:yoga:3.2.1",
 
             //Desugar
             desugar                       : "com.android.tools:desugar_jdk_libs:$desugarVersion",
@@ -144,7 +172,7 @@ ext {
             moshiKotlin                   : "com.squareup.moshi:moshi-kotlin-codegen:$moshi",
 
             //Pdf Viewer
-            bartekscPdf                   : 'com.github.barteksc:android-pdf-viewer:2.8.2',
+            bartekscPdf                   : 'com.github.marain87:AndroidPdfViewer:3.2.8',
 
             //JavaX
             javaxInject                   : 'javax.inject:javax.inject:1',
