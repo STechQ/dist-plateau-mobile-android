@@ -416,6 +416,32 @@ class MainActivity :
     
     </androidx.drawerlayout.widget.DrawerLayout>
 ```
+**3. AndroidManifest Adding Certificates**
+- To avoid SSL errors, you can add a certificate by defining networkSecurityConfig in the Android manifest file.
+
+```xml
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:networkSecurityConfig="@xml/config"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.QuickProject">
+```
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">kube.uatisbank</domain>
+        <trust-anchors>
+            <certificates src="@raw/kubeuatisbank"/>
+            <certificates src="system"/>
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
+```
 
 #### Optional Implementation
 
