@@ -236,9 +236,12 @@ class MainActivity :
 
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-        quickService!!.handleBack().subscribe {
-            // no opt
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            stopMiniApp()
+            return
         }
+
+        quickService.handleBack().subscribe()
     }
 
     override fun showLoading() {
@@ -329,7 +332,8 @@ class MainActivity :
     }
 
     override fun stopMiniApp() {
-        // no-opt
+        release()
+        finish()
     }
 
     override fun setTheme(p0: QThemeAttributes) {
