@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Components - Quick SDK Documentation</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a73e8' rx='15' width='100' height='100'/><text x='50' y='68' text-anchor='middle' fill='white' font-size='50' font-family='Arial' font-weight='bold'>Q</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">Q</div>
+                <div>
+                    <div class="logo-text">Quick SDK</div>
+                    <div class="logo-version">v1.7.9</div>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="../index.html">Home</a>
+                <a href="getting-started.html">Getting Started</a>
+                <a href="features.html">Features</a>
+                <a href="components.html" class="active">Components</a>
+                <a href="security.html">Security</a>
+                <a href="support.html">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Components</div>
+                <ul class="sidebar-nav">
+                    <li><a href="#overview" class="active"><span class="icon">&#128218;</span> Overview</a></li>
+                    <li><a href="#layout"><span class="icon">&#128450;</span> Layout</a></li>
+                    <li><a href="#navigation"><span class="icon">&#128736;</span> Navigation</a></li>
+                    <li><a href="#input"><span class="icon">&#9999;</span> Input Controls</a></li>
+                    <li><a href="#data"><span class="icon">&#128202;</span> Data Display</a></li>
+                    <li><a href="#selection"><span class="icon">&#9989;</span> Selection</a></li>
+                    <li><a href="#dialogs"><span class="icon">&#128488;</span> Dialogs & Modals</a></li>
+                    <li><a href="#progress"><span class="icon">&#8987;</span> Progress</a></li>
+                    <li><a href="#media"><span class="icon">&#127912;</span> Media</a></li>
+                    <li><a href="#maps"><span class="icon">&#128506;</span> Maps</a></li>
+                    <li><a href="#datagrid"><span class="icon">&#128200;</span> Data Grid</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <span>UI Components</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">UI Components</h1>
+                <p class="page-subtitle">Discover 98+ pre-built components for rapid application development following Material Design guidelines.</p>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>Component Library Overview</h2>
+                <p>Quick SDK includes a comprehensive library of UI components that follow Google's Material Design principles. Each component is optimized for performance, accessibility, and customization.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">98+</div>
+                        <div class="stat-label">Components</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">11</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Material 3</div>
+                        <div class="stat-label">Design System</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Yoga</div>
+                        <div class="stat-label">Layout Engine</div>
+                    </div>
+                </div>
+
+                <div class="info-box note">
+                    <div class="info-box-icon">&#128712;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Material Design</div>
+                        <div class="info-box-text">All components follow Material Design 3 guidelines ensuring a consistent, modern, and accessible user experience.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Layout Components -->
+            <section id="layout">
+                <h2>Layout & Container Components</h2>
+                <p>Build responsive layouts with these flexible container components powered by Facebook's Yoga layout engine.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Container</span>
+                        <span class="component-tag">Row</span>
+                        <span class="component-tag">Column</span>
+                        <span class="component-tag">Sheet</span>
+                        <span class="component-tag">Card</span>
+                        <span class="component-tag">Form</span>
+                        <span class="component-tag">Frame (Yoga Flex)</span>
+                        <span class="component-tag">GroupBox</span>
+                    </div>
+                </div>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#128450;</div>
+                        <div class="feature-content">
+                            <h4>Flex-Based Layouts</h4>
+                            <p>Use Container, Row, and Column components to create responsive flex-based layouts that adapt to different screen sizes.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128450;</div>
+                        <div class="feature-content">
+                            <h4>Surface Containers</h4>
+                            <p>Sheet and Card components provide elevated surfaces for content grouping with optional shadows and borders.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128450;</div>
+                        <div class="feature-content">
+                            <h4>Form Wrapper</h4>
+                            <p>Form component handles input grouping with built-in validation support and submission handling.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Navigation Components -->
+            <section id="navigation">
+                <h2>Navigation Components</h2>
+                <p>Create intuitive navigation experiences with these specialized components.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Bottom Navigation</span>
+                        <span class="component-tag">Navigation Drawer</span>
+                        <span class="component-tag">Tabs</span>
+                        <span class="component-tag">Tab Item</span>
+                        <span class="component-tag">Breadcrumbs</span>
+                        <span class="component-tag">App Bar</span>
+                        <span class="component-tag">Footer</span>
+                        <span class="component-tag">Menu</span>
+                    </div>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#128193;</div>
+                        <h3 class="card-title">Bottom Navigation</h3>
+                        <p class="card-description">Tab-based navigation bar at the bottom of the screen for primary destinations.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#9776;</div>
+                        <h3 class="card-title">Navigation Drawer</h3>
+                        <p class="card-description">Slide-out panel containing navigation links and app information.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#128196;</div>
+                        <h3 class="card-title">Tabs</h3>
+                        <p class="card-description">Horizontal tabs for organizing content into separate views.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon orange">&#10148;</div>
+                        <h3 class="card-title">Breadcrumbs</h3>
+                        <p class="card-description">Trail of links showing the user's location within the app hierarchy.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Input Controls -->
+            <section id="input">
+                <h2>Input Controls</h2>
+                <p>Comprehensive set of input components for user data entry with built-in validation and formatting.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Text Field</span>
+                        <span class="component-tag">Text Area</span>
+                        <span class="component-tag">Select</span>
+                        <span class="component-tag">ComboBox</span>
+                        <span class="component-tag">Autocomplete</span>
+                        <span class="component-tag">Date Picker</span>
+                        <span class="component-tag">Inline Date Picker</span>
+                        <span class="component-tag">CheckBox</span>
+                        <span class="component-tag">Radio</span>
+                        <span class="component-tag">Radio Group</span>
+                        <span class="component-tag">Switch</span>
+                        <span class="component-tag">Slider</span>
+                        <span class="component-tag">Range Slider</span>
+                        <span class="component-tag">File Input</span>
+                        <span class="component-tag">OTP Input</span>
+                    </div>
+                </div>
+
+                <h3>Input Formatters</h3>
+                <p>Built-in formatters automatically format user input for common data types:</p>
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Phone Number</span>
+                        <span class="component-tag">IBAN</span>
+                        <span class="component-tag">Credit Card</span>
+                        <span class="component-tag">Currency</span>
+                        <span class="component-tag">Number</span>
+                    </div>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-icon">&#128161;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">OTP Auto-Read</div>
+                        <div class="info-box-text">The OTP Input component supports automatic SMS reading, eliminating the need for users to manually enter verification codes.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Display -->
+            <section id="data">
+                <h2>Data Display Components</h2>
+                <p>Present information clearly and effectively with these display components.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Data Table</span>
+                        <span class="component-tag">List</span>
+                        <span class="component-tag">List Item</span>
+                        <span class="component-tag">List Group</span>
+                        <span class="component-tag">Carousel</span>
+                        <span class="component-tag">Timeline</span>
+                        <span class="component-tag">Timeline Item</span>
+                        <span class="component-tag">Label</span>
+                        <span class="component-tag">Avatar</span>
+                    </div>
+                </div>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#128202;</div>
+                        <div class="feature-content">
+                            <h4>Data Table</h4>
+                            <p>Advanced data table with sorting, filtering, and pagination capabilities for displaying structured data.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128203;</div>
+                        <div class="feature-content">
+                            <h4>Lists</h4>
+                            <p>Flexible list components supporting various item layouts, grouping, and nested structures.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128247;</div>
+                        <div class="feature-content">
+                            <h4>Carousel</h4>
+                            <p>Image carousel with swipe navigation and automatic sliding capabilities.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128197;</div>
+                        <div class="feature-content">
+                            <h4>Timeline</h4>
+                            <p>Visual timeline display for showing events in chronological order.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Selection Components -->
+            <section id="selection">
+                <h2>Selection Components</h2>
+                <p>Allow users to make choices with these selection-focused components.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Chip</span>
+                        <span class="component-tag">Chip Group</span>
+                        <span class="component-tag">Rating</span>
+                        <span class="component-tag">Button Toggle</span>
+                    </div>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#127991;</div>
+                        <h3 class="card-title">Chips</h3>
+                        <p class="card-description">Compact elements for input, filtering, or making selections.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#11088;</div>
+                        <h3 class="card-title">Rating</h3>
+                        <p class="card-description">Star-based rating component for collecting user feedback.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#128280;</div>
+                        <h3 class="card-title">Button Toggle</h3>
+                        <p class="card-description">Group of buttons where only one can be selected at a time.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dialogs & Modals -->
+            <section id="dialogs">
+                <h2>Dialogs & Modals</h2>
+                <p>Display important information or capture user input with overlay components.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Dialog</span>
+                        <span class="component-tag">Bottom Sheet</span>
+                        <span class="component-tag">Alert</span>
+                        <span class="component-tag">Quick Dialog</span>
+                        <span class="component-tag">Context Menu</span>
+                        <span class="component-tag">Snackbar</span>
+                    </div>
+                </div>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#128488;</div>
+                        <div class="feature-content">
+                            <h4>Modal Dialogs</h4>
+                            <p>Centered overlay dialogs for important actions or information that requires user attention.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128196;</div>
+                        <div class="feature-content">
+                            <h4>Bottom Sheet</h4>
+                            <p>Slide-up panel from the bottom of the screen, perfect for additional actions or content.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#9888;</div>
+                        <div class="feature-content">
+                            <h4>Alerts</h4>
+                            <p>Warning and confirmation dialogs with customizable buttons and content.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128172;</div>
+                        <div class="feature-content">
+                            <h4>Snackbar</h4>
+                            <p>Brief toast-like notifications that appear at the bottom of the screen.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Progress Components -->
+            <section id="progress">
+                <h2>Progress & Loading</h2>
+                <p>Indicate loading states and progress with these visual feedback components.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Progress Linear</span>
+                        <span class="component-tag">Progress Circular</span>
+                        <span class="component-tag">Stepper</span>
+                        <span class="component-tag">Stepper Step</span>
+                        <span class="component-tag">Stepper Header</span>
+                        <span class="component-tag">Skeleton Loader (Ghost)</span>
+                    </div>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#8212;</div>
+                        <h3 class="card-title">Linear Progress</h3>
+                        <p class="card-description">Horizontal progress bar showing determinate or indeterminate progress.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#8635;</div>
+                        <h3 class="card-title">Circular Progress</h3>
+                        <p class="card-description">Circular spinner for loading states and progress indication.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#10102;</div>
+                        <h3 class="card-title">Stepper</h3>
+                        <p class="card-description">Multi-step wizard component for guided processes.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon orange">&#9723;</div>
+                        <h3 class="card-title">Skeleton Loader</h3>
+                        <p class="card-description">Placeholder content shown while actual content is loading.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Media Components -->
+            <section id="media">
+                <h2>Media Components</h2>
+                <p>Display and interact with various media types.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Image</span>
+                        <span class="component-tag">PDF Viewer</span>
+                        <span class="component-tag">Video Player</span>
+                        <span class="component-tag">QR Scanner (Google)</span>
+                        <span class="component-tag">QR Scanner (Huawei)</span>
+                        <span class="component-tag">Lottie Animation</span>
+                    </div>
+                </div>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#127912;</div>
+                        <div class="feature-content">
+                            <h4>Image Component</h4>
+                            <p>Optimized image display with lazy loading, caching, and placeholder support. Supports JPEG, PNG, WebP, and SVG formats.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128196;</div>
+                        <div class="feature-content">
+                            <h4>PDF Viewer</h4>
+                            <p>Native PDF rendering for in-app document viewing with zoom and navigation controls.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#127909;</div>
+                        <div class="feature-content">
+                            <h4>Video Player</h4>
+                            <p>Full-featured video playback with controls, fullscreen support, and playback customization.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128247;</div>
+                        <div class="feature-content">
+                            <h4>QR Code Scanner</h4>
+                            <p>High-performance QR/barcode scanning using ML Kit (Google) or Scan Kit (Huawei).</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Maps Components -->
+            <section id="maps">
+                <h2>Map Components</h2>
+                <p>Full-featured map integration supporting both Google and Huawei platforms.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Google Maps</span>
+                        <span class="component-tag">Huawei Maps</span>
+                        <span class="component-tag">Map Base</span>
+                    </div>
+                </div>
+
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Map Display
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Markers
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Marker Clustering
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Polylines
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Polygons
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Street View
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        User Location
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Zoom Controls
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Grid -->
+            <section id="datagrid">
+                <h2>Advanced Data Grid</h2>
+                <p>Enterprise-grade data grid powered by DevExpress for complex data management scenarios.</p>
+
+                <div class="component-category">
+                    <div class="component-tags">
+                        <span class="component-tag">Data Grid</span>
+                        <span class="component-tag">Column</span>
+                        <span class="component-tag">Paging</span>
+                        <span class="component-tag">Sorting</span>
+                        <span class="component-tag">Filter Row</span>
+                        <span class="component-tag">Header Filter</span>
+                        <span class="component-tag">Search</span>
+                        <span class="component-tag">Selection</span>
+                        <span class="component-tag">Master Detail</span>
+                        <span class="component-tag">Row Dragging</span>
+                        <span class="component-tag">Export</span>
+                        <span class="component-tag">State Storing</span>
+                        <span class="component-tag">Column Chooser</span>
+                        <span class="component-tag">Column Fixing</span>
+                    </div>
+                </div>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#128202;</div>
+                        <div class="feature-content">
+                            <h4>Sorting & Filtering</h4>
+                            <p>Multi-column sorting with advanced filtering options including header filters and filter rows.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128196;</div>
+                        <div class="feature-content">
+                            <h4>Pagination</h4>
+                            <p>Client-side and server-side pagination for handling large datasets efficiently.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128193;</div>
+                        <div class="feature-content">
+                            <h4>Master-Detail Views</h4>
+                            <p>Expandable rows showing related detail data within the grid.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128190;</div>
+                        <div class="feature-content">
+                            <h4>Export</h4>
+                            <p>Export grid data to Excel or PDF formats for reporting and analysis.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-logo">Quick SDK by Softtech</div>
+                    <p class="footer-text">Plateau Studio Mobile Android SDK v1.7.9<br>&copy; 2024 Softtech. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

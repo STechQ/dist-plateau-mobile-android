@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Storage - Quick SDK Documentation</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a73e8' rx='15' width='100' height='100'/><text x='50' y='68' text-anchor='middle' fill='white' font-size='50' font-family='Arial' font-weight='bold'>Q</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">Q</div>
+                <div>
+                    <div class="logo-text">Quick SDK</div>
+                    <div class="logo-version">v1.7.9</div>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="../index.html">Home</a>
+                <a href="getting-started.html">Getting Started</a>
+                <a href="features.html">Features</a>
+                <a href="components.html">Components</a>
+                <a href="security.html">Security</a>
+                <a href="support.html">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Data Storage</div>
+                <ul class="sidebar-nav">
+                    <li><a href="#overview" class="active"><span class="icon">&#128218;</span> Overview</a></li>
+                    <li><a href="#room"><span class="icon">&#128451;</span> Room Database</a></li>
+                    <li><a href="#encrypted"><span class="icon">&#128274;</span> Encrypted Storage</a></li>
+                    <li><a href="#local"><span class="icon">&#128193;</span> Local Storage</a></li>
+                    <li><a href="#permanent"><span class="icon">&#128190;</span> Permanent Store</a></li>
+                    <li><a href="#cookies"><span class="icon">&#127850;</span> Cookies</a></li>
+                    <li><a href="#choosing"><span class="icon">&#128161;</span> Choosing Storage</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <span>Data Storage</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Data Storage</h1>
+                <p class="page-subtitle">Multiple storage options for different data persistence requirements, from temporary caching to secure permanent storage.</p>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>Storage Overview</h2>
+                <p>Quick SDK provides a unified storage module that supports multiple backends, allowing you to choose the right storage type for each use case. All storage operations are accessible through the Bridge API.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Storage Types</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">AES-256</div>
+                        <div class="stat-label">Encryption Available</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Room</div>
+                        <div class="stat-label">Database Engine</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Storage APIs</div>
+                    </div>
+                </div>
+
+                <h3>Storage Options at a Glance</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Storage Type</th>
+                                <th>Persistence</th>
+                                <th>Encryption</th>
+                                <th>Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Room Database</strong></td>
+                                <td><span class="badge success">Permanent</span></td>
+                                <td><span class="badge primary">Optional</span></td>
+                                <td>Structured data, complex queries</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Encrypted Storage</strong></td>
+                                <td><span class="badge success">Permanent</span></td>
+                                <td><span class="badge success">AES-256</span></td>
+                                <td>Credentials, sensitive data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Local Storage</strong></td>
+                                <td><span class="badge success">Permanent</span></td>
+                                <td><span class="badge warning">None</span></td>
+                                <td>Preferences, settings</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Permanent Store</strong></td>
+                                <td><span class="badge success">Permanent</span></td>
+                                <td><span class="badge warning">None</span></td>
+                                <td>Long-term key-value data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>In-Memory</strong></td>
+                                <td><span class="badge warning">Session</span></td>
+                                <td><span class="badge">N/A</span></td>
+                                <td>Temporary cache, session state</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cookies</strong></td>
+                                <td><span class="badge primary">Configurable</span></td>
+                                <td><span class="badge warning">Optional</span></td>
+                                <td>Web session management</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Room Database Section -->
+            <section id="room">
+                <h2>Room Database</h2>
+                <p>Room is Google's recommended solution for local data persistence on Android. Quick SDK integrates Room to provide robust structured data storage with SQL support.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#128202;</div>
+                        <h3 class="card-title">Structured Data</h3>
+                        <p class="card-description">Store data in tables with defined schemas, relationships, and indexes for efficient querying.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#128269;</div>
+                        <h3 class="card-title">Complex Queries</h3>
+                        <p class="card-description">Perform advanced queries with filtering, sorting, joins, and aggregations.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#128257;</div>
+                        <h3 class="card-title">Data Integrity</h3>
+                        <p class="card-description">ACID compliance ensures data consistency even during app crashes.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon orange">&#128190;</div>
+                        <h3 class="card-title">Database Switching</h3>
+                        <p class="card-description">Support for multiple databases with runtime switching capability.</p>
+                    </div>
+                </div>
+
+                <h3>Key Features</h3>
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>SQLite Foundation</h4>
+                            <p>Built on SQLite, providing a battle-tested relational database engine optimized for mobile.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Type Safety</h4>
+                            <p>Compile-time query verification prevents runtime SQL errors.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Migration Support</h4>
+                            <p>Automatic database migrations when schema changes occur.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Encrypted Storage Section -->
+            <section id="encrypted">
+                <h2>Encrypted Storage</h2>
+                <p>For sensitive data that requires protection, Quick SDK provides encrypted storage using industry-standard AES-256-GCM encryption.</p>
+
+                <div class="info-box note">
+                    <div class="info-box-icon">&#128274;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Bank-Grade Security</div>
+                        <div class="info-box-text">Encrypted storage uses AES-256-GCM with keys stored in Android Keystore, providing the same level of security used by banking applications.</div>
+                    </div>
+                </div>
+
+                <h3>Security Features</h3>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        AES-256-GCM Encryption
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Android Keystore Keys
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Hardware-Backed Security
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Key Rotation Support
+                    </div>
+                </div>
+
+                <h3>Use Cases</h3>
+                <ul>
+                    <li>User credentials and passwords</li>
+                    <li>Authentication tokens and refresh tokens</li>
+                    <li>Personal identifiable information (PII)</li>
+                    <li>Financial data and account numbers</li>
+                    <li>Encryption keys and secrets</li>
+                    <li>Biometric data references</li>
+                </ul>
+
+                <h3>Available Operations</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operation</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Set</strong></td>
+                                <td>Store encrypted key-value data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Get</strong></td>
+                                <td>Retrieve and decrypt stored data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Remove</strong></td>
+                                <td>Delete specific encrypted items</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Clear</strong></td>
+                                <td>Remove all encrypted data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Local Storage Section -->
+            <section id="local">
+                <h2>Local Storage</h2>
+                <p>Local storage provides simple key-value storage for application preferences and non-sensitive data. It's accessible through JavaScript-like APIs.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#9889;</div>
+                        <h3 class="card-title">Fast Access</h3>
+                        <p class="card-description">Optimized for quick read/write operations with minimal overhead.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#128193;</div>
+                        <h3 class="card-title">Simple API</h3>
+                        <p class="card-description">Familiar localStorage-like interface for easy adoption.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#128202;</div>
+                        <h3 class="card-title">JSON Support</h3>
+                        <p class="card-description">Store complex objects as JSON with automatic serialization.</p>
+                    </div>
+                </div>
+
+                <h3>Operations</h3>
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Set Item</h4>
+                            <p>Store data with a key for later retrieval.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Get Item</h4>
+                            <p>Retrieve previously stored data by key.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Remove Item</h4>
+                            <p>Delete specific items from storage.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="info-box warning">
+                    <div class="info-box-icon">&#9888;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Security Note</div>
+                        <div class="info-box-text">Local storage is not encrypted by default. Never store sensitive data like passwords or tokens in local storage. Use Encrypted Storage instead.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Permanent Store Section -->
+            <section id="permanent">
+                <h2>Permanent Store</h2>
+                <p>Permanent store provides long-term key-value storage with support for multiple named databases and full CRUD operations.</p>
+
+                <h3>Features</h3>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Named Databases
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Get All Items
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Database Switching
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Database Deletion
+                    </div>
+                </div>
+
+                <h3>Available Operations</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operation</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Set</strong></td>
+                                <td>Store a key-value pair in the permanent store</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Get</strong></td>
+                                <td>Retrieve a value by its key</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Delete</strong></td>
+                                <td>Remove a specific key-value pair</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Get All</strong></td>
+                                <td>Retrieve all stored key-value pairs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Change Database</strong></td>
+                                <td>Switch to a different named database</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Delete Database</strong></td>
+                                <td>Remove an entire named database</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Get Current DB Name</strong></td>
+                                <td>Get the name of the currently active database</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-icon">&#128161;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Multiple Databases</div>
+                        <div class="info-box-text">Use named databases to logically separate data for different mini-apps or features, making management and cleanup easier.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cookies Section -->
+            <section id="cookies">
+                <h2>Cookie Management</h2>
+                <p>Quick SDK provides comprehensive cookie management for web session handling and backend communication.</p>
+
+                <h3>Cookie Operations</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operation</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Set Cookie</strong></td>
+                                <td>Create or update a cookie with optional expiration</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Get Cookie</strong></td>
+                                <td>Retrieve a specific cookie by name</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Get All Cookies</strong></td>
+                                <td>Retrieve all cookies for the current domain</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Remove Cookie</strong></td>
+                                <td>Delete a specific cookie</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Clear Cookies</strong></td>
+                                <td>Remove all cookies</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Cookie Attributes</h3>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Name & Value
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Expiration
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Domain
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Path
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Secure Flag
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        HttpOnly
+                    </div>
+                </div>
+            </section>
+
+            <!-- Choosing Storage Section -->
+            <section id="choosing">
+                <h2>Choosing the Right Storage</h2>
+                <p>Selecting the appropriate storage type depends on your data requirements. Use this guide to make the right choice.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-title">Sensitive Data (Credentials, Tokens)</div>
+                        <div class="timeline-text"><strong>Use: Encrypted Storage</strong> - Always encrypt sensitive information using AES-256-GCM with Android Keystore-backed keys.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Structured Data with Queries</div>
+                        <div class="timeline-text"><strong>Use: Room Database</strong> - When you need to store relational data and perform complex queries with filtering and sorting.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Simple Preferences</div>
+                        <div class="timeline-text"><strong>Use: Local Storage</strong> - For app settings, UI preferences, and non-sensitive configuration data.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Long-term Key-Value Data</div>
+                        <div class="timeline-text"><strong>Use: Permanent Store</strong> - When you need persistent key-value storage with database organization capabilities.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Temporary Cache</div>
+                        <div class="timeline-text"><strong>Use: In-Memory</strong> - For session-specific data that doesn't need to persist after app restart.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Web Session Management</div>
+                        <div class="timeline-text"><strong>Use: Cookies</strong> - For managing authentication sessions with backend web services.</div>
+                    </div>
+                </div>
+
+                <div class="info-box note">
+                    <div class="info-box-icon">&#128712;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Data Minimization</div>
+                        <div class="info-box-text">Follow the principle of data minimization - only store data that is necessary for your application's functionality, and regularly clean up data that is no longer needed.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-logo">Quick SDK by Softtech</div>
+                    <p class="footer-text">Plateau Studio Mobile Android SDK v1.7.9<br>&copy; 2024 Softtech. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

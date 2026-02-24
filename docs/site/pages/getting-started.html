@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Quick SDK Documentation</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a73e8' rx='15' width='100' height='100'/><text x='50' y='68' text-anchor='middle' fill='white' font-size='50' font-family='Arial' font-weight='bold'>Q</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">Q</div>
+                <div>
+                    <div class="logo-text">Quick SDK</div>
+                    <div class="logo-version">v1.7.9</div>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="../index.html">Home</a>
+                <a href="getting-started.html" class="active">Getting Started</a>
+                <a href="features.html">Features</a>
+                <a href="components.html">Components</a>
+                <a href="security.html">Security</a>
+                <a href="support.html">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Getting Started</div>
+                <ul class="sidebar-nav">
+                    <li><a href="#introduction" class="active"><span class="icon">&#128218;</span> Introduction</a></li>
+                    <li><a href="#requirements"><span class="icon">&#9989;</span> Requirements</a></li>
+                    <li><a href="#architecture"><span class="icon">&#127959;</span> Architecture</a></li>
+                    <li><a href="#setup"><span class="icon">&#9881;</span> Project Setup</a></li>
+                    <li><a href="#first-app"><span class="icon">&#128241;</span> First Application</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Next Steps</div>
+                <ul class="sidebar-nav">
+                    <li><a href="features.html"><span class="icon">&#9889;</span> Explore Features</a></li>
+                    <li><a href="components.html"><span class="icon">&#128736;</span> UI Components</a></li>
+                    <li><a href="miniapps.html"><span class="icon">&#128241;</span> Mini-Apps</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <span>Getting Started</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Getting Started</h1>
+                <p class="page-subtitle">Learn the fundamentals of Quick SDK and start building powerful mobile applications.</p>
+            </div>
+
+            <!-- Introduction Section -->
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p>Quick SDK (Plateau Studio Mobile Android SDK) is an enterprise-grade development kit that enables rapid creation of dynamic, secure, and feature-rich Android applications. Whether you're building banking apps, e-commerce platforms, or enterprise solutions, Quick SDK provides all the tools you need.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#128640;</div>
+                        <h3 class="card-title">Fast Development</h3>
+                        <p class="card-description">Build applications significantly faster with pre-built components and templates.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#128274;</div>
+                        <h3 class="card-title">Enterprise Security</h3>
+                        <p class="card-description">Bank-grade security features protect your application and user data.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#127760;</div>
+                        <h3 class="card-title">Dynamic Updates</h3>
+                        <p class="card-description">Update your app content without requiring app store releases.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Requirements Section -->
+            <section id="requirements">
+                <h2>System Requirements</h2>
+                <p>Before you begin, ensure your development environment meets the following requirements:</p>
+
+                <h3>Development Environment</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Requirement</th>
+                                <th>Minimum</th>
+                                <th>Recommended</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Android Studio</td>
+                                <td>Arctic Fox or later</td>
+                                <td>Hedgehog or later</td>
+                            </tr>
+                            <tr>
+                                <td>Kotlin</td>
+                                <td>1.8.0</td>
+                                <td>1.9.0+</td>
+                            </tr>
+                            <tr>
+                                <td>Java</td>
+                                <td>Java 17</td>
+                                <td>Java 17</td>
+                            </tr>
+                            <tr>
+                                <td>Gradle</td>
+                                <td>7.5</td>
+                                <td>8.0+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Target Device Requirements</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Requirement</th>
+                                <th>Specification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Minimum Android Version</td>
+                                <td>Android 7.0 (API Level 24)</td>
+                            </tr>
+                            <tr>
+                                <td>Target Android Version</td>
+                                <td>Android 14 (API Level 34)</td>
+                            </tr>
+                            <tr>
+                                <td>Supported Platforms</td>
+                                <td>Google Mobile Services (GMS), Huawei Mobile Services (HMS)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-icon">&#128161;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Tip</div>
+                        <div class="info-box-text">For the best development experience, we recommend using the latest stable version of Android Studio with updated Android SDK tools.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture Section -->
+            <section id="architecture">
+                <h2>SDK Architecture</h2>
+                <p>Quick SDK follows a modular architecture, making it easy to understand and extend. Here's an overview of the main modules:</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-title">Quick Mobile (Core)</div>
+                        <div class="timeline-text">The central engine that orchestrates all SDK operations, manages app lifecycle, and coordinates between modules.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Quick Bridge</div>
+                        <div class="timeline-text">Enables seamless communication between JavaScript and native Android code with 186+ API methods.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Quick Components</div>
+                        <div class="timeline-text">A library of 98+ pre-built, customizable UI components following Material Design guidelines.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Network Framework</div>
+                        <div class="timeline-text">Robust HTTP networking layer with SSL pinning, caching, and comprehensive error handling.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Rendering Framework</div>
+                        <div class="timeline-text">Transforms Quick script into native Android views using Facebook's Yoga layout engine.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Storage Module</div>
+                        <div class="timeline-text">Unified data persistence with Room database, SharedPreferences, and encrypted storage options.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Setup Section -->
+            <section id="setup">
+                <h2>Project Setup</h2>
+                <p>Setting up Quick SDK in your project involves the following steps:</p>
+
+                <h3>Step 1: Add SDK Dependencies</h3>
+                <p>Add the Quick SDK dependency to your project's build configuration. Your development team will provide the necessary repository access and credentials.</p>
+
+                <h3>Step 2: Initialize the SDK</h3>
+                <p>Initialize the Quick SDK in your application's startup process. The SDK requires basic configuration including:</p>
+                <ul>
+                    <li>Application context</li>
+                    <li>Environment configuration (Development, Staging, Production)</li>
+                    <li>Security settings and certificates</li>
+                    <li>Theme preferences</li>
+                </ul>
+
+                <h3>Step 3: Configure Permissions</h3>
+                <p>Depending on the features you use, you may need to configure the following permissions:</p>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Internet Access
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Camera (QR Scanner)
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Location Services
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Storage Access
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Biometric Auth
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Push Notifications
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-icon">&#9888;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Important</div>
+                        <div class="info-box-text">Always request only the permissions your application actually needs. Quick SDK handles runtime permission requests automatically for its components.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- First App Section -->
+            <section id="first-app">
+                <h2>Building Your First Application</h2>
+                <p>Once the SDK is set up, you're ready to build your first Quick SDK application. Here's the recommended workflow:</p>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">1</div>
+                        <div class="feature-content">
+                            <h4>Design Your App Structure</h4>
+                            <p>Plan your application's screens, navigation flow, and data requirements before starting development.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">2</div>
+                        <div class="feature-content">
+                            <h4>Create Your First Screen</h4>
+                            <p>Use Quick SDK's component library to build your first screen. Start with basic layouts and add components as needed.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">3</div>
+                        <div class="feature-content">
+                            <h4>Add Navigation</h4>
+                            <p>Implement navigation between screens using the SDK's navigation components and deep linking support.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">4</div>
+                        <div class="feature-content">
+                            <h4>Connect to Backend</h4>
+                            <p>Use the Network Framework to connect your app to backend services with secure HTTP communications.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">5</div>
+                        <div class="feature-content">
+                            <h4>Test and Deploy</h4>
+                            <p>Test your application using the built-in testing tools and deploy to production when ready.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Next Steps -->
+            <section>
+                <h2>What's Next?</h2>
+                <div class="card-grid">
+                    <a href="features.html" class="card">
+                        <div class="card-icon">&#9889;</div>
+                        <h3 class="card-title">Explore Features</h3>
+                        <p class="card-description">Discover all the powerful capabilities of Quick SDK.</p>
+                    </a>
+                    <a href="components.html" class="card">
+                        <div class="card-icon purple">&#128736;</div>
+                        <h3 class="card-title">Browse Components</h3>
+                        <p class="card-description">Find the perfect UI components for your application.</p>
+                    </a>
+                    <a href="miniapps.html" class="card">
+                        <div class="card-icon orange">&#128241;</div>
+                        <h3 class="card-title">Mini-App Development</h3>
+                        <p class="card-description">Learn how to build and deploy mini-applications.</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-logo">Quick SDK by Softtech</div>
+                    <p class="footer-text">Plateau Studio Mobile Android SDK v1.7.9<br>&copy; 2024 Softtech. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

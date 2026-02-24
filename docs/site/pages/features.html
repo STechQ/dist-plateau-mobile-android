@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Quick SDK Documentation</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a73e8' rx='15' width='100' height='100'/><text x='50' y='68' text-anchor='middle' fill='white' font-size='50' font-family='Arial' font-weight='bold'>Q</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">Q</div>
+                <div>
+                    <div class="logo-text">Quick SDK</div>
+                    <div class="logo-version">v1.7.9</div>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="../index.html">Home</a>
+                <a href="getting-started.html">Getting Started</a>
+                <a href="features.html" class="active">Features</a>
+                <a href="components.html">Components</a>
+                <a href="security.html">Security</a>
+                <a href="support.html">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Features</div>
+                <ul class="sidebar-nav">
+                    <li><a href="#overview" class="active"><span class="icon">&#128218;</span> Overview</a></li>
+                    <li><a href="#bridge"><span class="icon">&#128279;</span> Bridge API</a></li>
+                    <li><a href="#networking"><span class="icon">&#127760;</span> Networking</a></li>
+                    <li><a href="#storage"><span class="icon">&#128451;</span> Data Storage</a></li>
+                    <li><a href="#location"><span class="icon">&#128205;</span> Location & Maps</a></li>
+                    <li><a href="#media"><span class="icon">&#127909;</span> Media</a></li>
+                    <li><a href="#input"><span class="icon">&#9999;</span> Forms & Input</a></li>
+                    <li><a href="#navigation"><span class="icon">&#128736;</span> Navigation</a></li>
+                    <li><a href="#theming"><span class="icon">&#127912;</span> Theming</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <span>Features</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Features Overview</h1>
+                <p class="page-subtitle">Explore the powerful capabilities that make Quick SDK the choice for enterprise mobile development.</p>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>Feature Highlights</h2>
+                <p>Quick SDK provides a comprehensive set of features designed for enterprise-grade mobile applications. From rapid UI development to secure data handling, every aspect is built with production requirements in mind.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">98+</div>
+                        <div class="stat-label">UI Components</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">186+</div>
+                        <div class="stat-label">Bridge APIs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">AES-256</div>
+                        <div class="stat-label">Encryption</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">GMS + HMS</div>
+                        <div class="stat-label">Platform Support</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bridge API Section -->
+            <section id="bridge">
+                <h2>JavaScript-Native Bridge</h2>
+                <p>The Quick Bridge enables seamless communication between JavaScript and native Android code. This powerful feature allows for dynamic content updates without requiring app store releases.</p>
+
+                <h3>Bridge Capabilities</h3>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Component Creation
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Property Management
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Event Handling
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Network Requests
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Data Storage
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Cryptography
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Theme Switching
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Device Info Access
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Location Services
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        File Operations
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Clipboard Access
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Deep Linking
+                    </div>
+                </div>
+
+                <div class="info-box note">
+                    <div class="info-box-icon">&#128712;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Two-Way Communication</div>
+                        <div class="info-box-text">The bridge supports bidirectional communication - JavaScript can call native methods and native code can invoke JavaScript callbacks.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Networking Section -->
+            <section id="networking">
+                <h2>Network Framework</h2>
+                <p>A robust HTTP networking layer designed for enterprise applications with comprehensive security and reliability features.</p>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>HTTP Methods</h4>
+                            <p>Full support for GET, POST, PUT, DELETE requests with JSON and form data handling.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>SSL/TLS Security</h4>
+                            <p>Secure connections using TLS 1.2+ with optional certificate pinning to prevent man-in-the-middle attacks.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Response Caching</h4>
+                            <p>Built-in caching mechanisms to reduce network calls and improve app responsiveness.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Automatic Retry</h4>
+                            <p>Configurable retry logic for failed requests with exponential backoff.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Network Monitoring</h4>
+                            <p>Real-time network status monitoring with automatic reconnection handling.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Storage Section -->
+            <section id="storage">
+                <h2>Data Storage</h2>
+                <p>Multiple storage options to meet various data persistence requirements, from temporary caching to secure long-term storage.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Storage Type</th>
+                                <th>Use Case</th>
+                                <th>Encryption</th>
+                                <th>Persistence</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Room Database</strong></td>
+                                <td>Structured data, complex queries</td>
+                                <td><span class="badge success">Optional</span></td>
+                                <td><span class="badge primary">Permanent</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Encrypted Storage</strong></td>
+                                <td>Sensitive data, credentials</td>
+                                <td><span class="badge success">AES-256</span></td>
+                                <td><span class="badge primary">Permanent</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Local Storage</strong></td>
+                                <td>Key-value pairs, preferences</td>
+                                <td><span class="badge warning">Optional</span></td>
+                                <td><span class="badge primary">Permanent</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>In-Memory Cache</strong></td>
+                                <td>Temporary data, session state</td>
+                                <td><span class="badge">N/A</span></td>
+                                <td><span class="badge warning">Session</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cookies</strong></td>
+                                <td>Web session management</td>
+                                <td><span class="badge warning">Optional</span></td>
+                                <td><span class="badge warning">Configurable</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-icon">&#128161;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Security Best Practice</div>
+                        <div class="info-box-text">Always use Encrypted Storage for sensitive information such as user credentials, tokens, and personal data.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Location & Maps Section -->
+            <section id="location">
+                <h2>Location & Maps</h2>
+                <p>Comprehensive location services and map integration supporting both Google and Huawei platforms.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#128205;</div>
+                        <h3 class="card-title">GPS Location</h3>
+                        <p class="card-description">Real-time device location tracking with configurable accuracy levels.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#128506;</div>
+                        <h3 class="card-title">Interactive Maps</h3>
+                        <p class="card-description">Full Google Maps and Huawei Maps integration with markers, routes, and overlays.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#128269;</div>
+                        <h3 class="card-title">Geocoding</h3>
+                        <p class="card-description">Convert between addresses and coordinates seamlessly.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon orange">&#127939;</div>
+                        <h3 class="card-title">Location Tracking</h3>
+                        <p class="card-description">Background location updates for real-time tracking applications.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Media Section -->
+            <section id="media">
+                <h2>Media Capabilities</h2>
+                <p>Rich media support for modern application requirements.</p>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#127912;</div>
+                        <div class="feature-content">
+                            <h4>Image Display</h4>
+                            <p>Optimized image loading with lazy loading, caching, and support for various formats including SVG.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#127909;</div>
+                        <div class="feature-content">
+                            <h4>Video Player</h4>
+                            <p>Native video playback with fullscreen support and playback controls.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128196;</div>
+                        <div class="feature-content">
+                            <h4>PDF Viewer</h4>
+                            <p>Built-in PDF document viewer for in-app document display.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128247;</div>
+                        <div class="feature-content">
+                            <h4>QR Code Scanner</h4>
+                            <p>High-performance QR code scanning using Google ML Kit or Huawei Scan Kit.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#127916;</div>
+                        <div class="feature-content">
+                            <h4>Lottie Animations</h4>
+                            <p>Support for Lottie JSON animations for rich, smooth UI animations.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Forms & Input Section -->
+            <section id="input">
+                <h2>Forms & Input</h2>
+                <p>Comprehensive form handling with validation, formatting, and specialized input components.</p>
+
+                <h3>Input Formatters</h3>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Phone Number
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        IBAN
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Credit Card
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Currency
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Number
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Date/Time
+                    </div>
+                </div>
+
+                <h3>Form Features</h3>
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Client-Side Validation</h4>
+                            <p>Real-time input validation with customizable error messages.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>OTP Input with Auto-Read</h4>
+                            <p>Specialized OTP component with automatic SMS reading capability.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>File Upload</h4>
+                            <p>Single and multiple file upload with progress tracking.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Autocomplete</h4>
+                            <p>Smart suggestions with async data loading support.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Navigation Section -->
+            <section id="navigation">
+                <h2>Navigation</h2>
+                <p>Flexible navigation options for creating intuitive user experiences.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#128279;</div>
+                        <h3 class="card-title">Deep Linking</h3>
+                        <p class="card-description">URL-based navigation with schema validation and parameter handling.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#128193;</div>
+                        <h3 class="card-title">Tab Navigation</h3>
+                        <p class="card-description">Bottom navigation and tab-based interfaces for quick access.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#9776;</div>
+                        <h3 class="card-title">Navigation Drawer</h3>
+                        <p class="card-description">Slide-out menu for comprehensive navigation options.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon orange">&#128257;</div>
+                        <h3 class="card-title">Page Transitions</h3>
+                        <p class="card-description">Smooth animated transitions between screens.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Theming Section -->
+            <section id="theming">
+                <h2>Theming & Customization</h2>
+                <p>Full control over your application's visual appearance with comprehensive theming support.</p>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#127769;</div>
+                        <div class="feature-content">
+                            <h4>Light & Dark Themes</h4>
+                            <p>Built-in support for light and dark modes with automatic system preference detection.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#127912;</div>
+                        <div class="feature-content">
+                            <h4>Custom Themes</h4>
+                            <p>Create and apply custom themes to match your brand identity.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128288;</div>
+                        <div class="feature-content">
+                            <h4>Custom Fonts</h4>
+                            <p>Load and use custom typography throughout your application.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128396;</div>
+                        <div class="feature-content">
+                            <h4>CSS Styling</h4>
+                            <p>Apply custom CSS styles to components for precise visual control.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-logo">Quick SDK by Softtech</div>
+                    <p class="footer-text">Plateau Studio Mobile Android SDK v1.7.9<br>&copy; 2024 Softtech. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

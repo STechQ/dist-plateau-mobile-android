@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security - Quick SDK Documentation</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a73e8' rx='15' width='100' height='100'/><text x='50' y='68' text-anchor='middle' fill='white' font-size='50' font-family='Arial' font-weight='bold'>Q</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">Q</div>
+                <div>
+                    <div class="logo-text">Quick SDK</div>
+                    <div class="logo-version">v1.7.9</div>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="../index.html">Home</a>
+                <a href="getting-started.html">Getting Started</a>
+                <a href="features.html">Features</a>
+                <a href="components.html">Components</a>
+                <a href="security.html" class="active">Security</a>
+                <a href="support.html">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Security</div>
+                <ul class="sidebar-nav">
+                    <li><a href="#overview" class="active"><span class="icon">&#128218;</span> Overview</a></li>
+                    <li><a href="#encryption"><span class="icon">&#128272;</span> Encryption</a></li>
+                    <li><a href="#network"><span class="icon">&#127760;</span> Network Security</a></li>
+                    <li><a href="#storage"><span class="icon">&#128451;</span> Secure Storage</a></li>
+                    <li><a href="#authentication"><span class="icon">&#128100;</span> Authentication</a></li>
+                    <li><a href="#permissions"><span class="icon">&#9989;</span> Permissions</a></li>
+                    <li><a href="#best-practices"><span class="icon">&#128161;</span> Best Practices</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <span>Security</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Security</h1>
+                <p class="page-subtitle">Enterprise-grade security features to protect your application and user data.</p>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>Security Overview</h2>
+                <p>Quick SDK is built with security as a core principle. Whether you're developing banking applications, e-commerce platforms, or enterprise solutions, the SDK provides comprehensive security features to protect sensitive data and communications.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">AES-256</div>
+                        <div class="stat-label">Data Encryption</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">TLS 1.2+</div>
+                        <div class="stat-label">Network Security</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">SHA-512</div>
+                        <div class="stat-label">Secure Hashing</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">RSA</div>
+                        <div class="stat-label">Public Key Crypto</div>
+                    </div>
+                </div>
+
+                <div class="info-box note">
+                    <div class="info-box-icon">&#128274;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Bank-Grade Security</div>
+                        <div class="info-box-text">Quick SDK's security features meet the requirements of financial institutions and are used in production banking applications.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Encryption Section -->
+            <section id="encryption">
+                <h2>Data Encryption</h2>
+                <p>Quick SDK provides multiple layers of encryption to protect data at rest and in transit.</p>
+
+                <h3>AES-256-GCM Encryption</h3>
+                <p>The SDK uses AES-256-GCM (Galois/Counter Mode) for data encryption, providing both confidentiality and authentication. This is the same encryption standard used by government agencies and financial institutions worldwide.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Specification</th>
+                                <th>Security Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Algorithm</strong></td>
+                                <td>AES (Advanced Encryption Standard)</td>
+                                <td><span class="badge success">Military Grade</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Key Length</strong></td>
+                                <td>256 bits</td>
+                                <td><span class="badge success">Maximum</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mode</strong></td>
+                                <td>GCM (Galois/Counter Mode)</td>
+                                <td><span class="badge success">Authenticated</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Key Storage</strong></td>
+                                <td>Android Keystore</td>
+                                <td><span class="badge success">Hardware-Backed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Cryptographic Operations</h3>
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#128272;</div>
+                        <div class="feature-content">
+                            <h4>RSA Key Generation</h4>
+                            <p>Generate secure RSA key pairs for public key cryptography operations.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128272;</div>
+                        <div class="feature-content">
+                            <h4>SHA-512 Hashing</h4>
+                            <p>Secure hashing algorithm for password hashing and data integrity verification.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128272;</div>
+                        <div class="feature-content">
+                            <h4>Digital Signatures</h4>
+                            <p>Sign and verify data to ensure authenticity and prevent tampering.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Network Security Section -->
+            <section id="network">
+                <h2>Network Security</h2>
+                <p>All network communications are secured with industry-standard protocols and additional protection mechanisms.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#128274;</div>
+                        <h3 class="card-title">SSL/TLS Encryption</h3>
+                        <p class="card-description">All network traffic is encrypted using TLS 1.2 or higher, ensuring data privacy during transmission.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#128203;</div>
+                        <h3 class="card-title">Certificate Pinning</h3>
+                        <p class="card-description">Pin specific certificates to prevent man-in-the-middle attacks even on compromised networks.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#128279;</div>
+                        <h3 class="card-title">URL Whitelisting</h3>
+                        <p class="card-description">Restrict network requests to approved endpoints only, preventing unauthorized communications.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon orange">&#128736;</div>
+                        <h3 class="card-title">Request Signing</h3>
+                        <p class="card-description">Sign API requests to verify authenticity and prevent request tampering.</p>
+                    </div>
+                </div>
+
+                <h3>Certificate Pinning</h3>
+                <p>Certificate pinning adds an extra layer of security by ensuring your app only communicates with servers presenting specific SSL certificates. This protects against:</p>
+                <ul>
+                    <li>Man-in-the-middle attacks</li>
+                    <li>Rogue certificate authorities</li>
+                    <li>Compromised proxy servers</li>
+                    <li>Network-level interception attempts</li>
+                </ul>
+
+                <div class="info-box warning">
+                    <div class="info-box-icon">&#9888;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Certificate Rotation</div>
+                        <div class="info-box-text">When using certificate pinning, plan for certificate rotation by including backup pins and coordinating updates with your backend team.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Secure Storage Section -->
+            <section id="storage">
+                <h2>Secure Data Storage</h2>
+                <p>Multiple storage options with varying security levels to meet different data protection requirements.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Storage Type</th>
+                                <th>Encryption</th>
+                                <th>Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Encrypted Storage</strong></td>
+                                <td><span class="badge success">AES-256-GCM</span></td>
+                                <td>Credentials, tokens, sensitive user data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Android Keystore</strong></td>
+                                <td><span class="badge success">Hardware-Backed</span></td>
+                                <td>Encryption keys, biometric data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Room Database</strong></td>
+                                <td><span class="badge primary">Optional</span></td>
+                                <td>Structured app data with optional encryption</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Local Storage</strong></td>
+                                <td><span class="badge warning">None</span></td>
+                                <td>Non-sensitive preferences and settings</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Android Keystore</h3>
+                <p>Encryption keys are stored in the Android Keystore, which provides:</p>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Hardware-backed storage
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Key extraction prevention
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Biometric key protection
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Key use authorization
+                    </div>
+                </div>
+            </section>
+
+            <!-- Authentication Section -->
+            <section id="authentication">
+                <h2>Authentication</h2>
+                <p>Comprehensive authentication support for secure user verification.</p>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#128100;</div>
+                        <div class="feature-content">
+                            <h4>OAuth Integration</h4>
+                            <p>Full OAuth 2.0 and OpenID Connect support via AppAuth for secure third-party authentication.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128588;</div>
+                        <div class="feature-content">
+                            <h4>Biometric Authentication</h4>
+                            <p>Support for fingerprint and face recognition for convenient yet secure authentication.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128273;</div>
+                        <div class="feature-content">
+                            <h4>IAM Integration</h4>
+                            <p>Enterprise Identity and Access Management integration for corporate environments.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128241;</div>
+                        <div class="feature-content">
+                            <h4>OTP Verification</h4>
+                            <p>One-time password support with automatic SMS reading for seamless verification.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="info-box tip">
+                    <div class="info-box-icon">&#128161;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Multi-Factor Authentication</div>
+                        <div class="info-box-text">For maximum security, combine biometric authentication with OTP verification for multi-factor authentication.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Permissions Section -->
+            <section id="permissions">
+                <h2>Permission Management</h2>
+                <p>Quick SDK handles runtime permissions intelligently, requesting only what's necessary when it's needed.</p>
+
+                <h3>Permission Types</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Permission</th>
+                                <th>Required For</th>
+                                <th>When Requested</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Internet</strong></td>
+                                <td>Network communications</td>
+                                <td>Always (manifest)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Camera</strong></td>
+                                <td>QR scanning, photo capture</td>
+                                <td>When feature is used</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Location</strong></td>
+                                <td>Maps, GPS features</td>
+                                <td>When feature is used</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Storage</strong></td>
+                                <td>File downloads, uploads</td>
+                                <td>When feature is used</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Biometric</strong></td>
+                                <td>Fingerprint/face auth</td>
+                                <td>When feature is used</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Method Permission Control</h3>
+                <p>In mini-app environments, the SDK supports fine-grained permission control over which bridge methods each mini-app can access, preventing unauthorized functionality usage.</p>
+            </section>
+
+            <!-- Best Practices Section -->
+            <section id="best-practices">
+                <h2>Security Best Practices</h2>
+                <p>Follow these guidelines to maximize security in your Quick SDK application.</p>
+
+                <div class="accordion">
+                    <div class="accordion-item active">
+                        <div class="accordion-header">
+                            &#128274; Always Use Encrypted Storage for Sensitive Data
+                        </div>
+                        <div class="accordion-content">
+                            <p>Never store passwords, tokens, or personal information in plain local storage. Always use the Encrypted Storage APIs which provide AES-256-GCM encryption with Android Keystore-backed keys.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            &#127760; Enable Certificate Pinning
+                        </div>
+                        <div class="accordion-content">
+                            <p>Configure certificate pinning for all API endpoints to prevent man-in-the-middle attacks. Include backup pins to handle certificate rotation smoothly.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            &#128100; Implement Session Timeout
+                        </div>
+                        <div class="accordion-content">
+                            <p>Configure appropriate session timeouts and automatic logout for inactive users. Clear sensitive data from memory when the app goes to background.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            &#9989; Request Minimal Permissions
+                        </div>
+                        <div class="accordion-content">
+                            <p>Only request permissions that your application actually needs. Request them at the point of use rather than at app launch for better user trust.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            &#128736; Validate All Inputs
+                        </div>
+                        <div class="accordion-content">
+                            <p>Always validate user inputs on both client and server side. Use the SDK's built-in validation features to prevent injection attacks and data corruption.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Security Checklist</h3>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#9744;</span>
+                        Encrypted storage for credentials
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#9744;</span>
+                        Certificate pinning enabled
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#9744;</span>
+                        Biometric authentication
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#9744;</span>
+                        Session timeout configured
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#9744;</span>
+                        Input validation implemented
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#9744;</span>
+                        Debug logging disabled
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#9744;</span>
+                        ProGuard/R8 enabled
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#9744;</span>
+                        API keys secured
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-logo">Quick SDK by Softtech</div>
+                    <p class="footer-text">Plateau Studio Mobile Android SDK v1.7.9<br>&copy; 2024 Softtech. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

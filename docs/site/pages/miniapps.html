@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Apps - Quick SDK Documentation</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a73e8' rx='15' width='100' height='100'/><text x='50' y='68' text-anchor='middle' fill='white' font-size='50' font-family='Arial' font-weight='bold'>Q</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">Q</div>
+                <div>
+                    <div class="logo-text">Quick SDK</div>
+                    <div class="logo-version">v1.7.9</div>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="../index.html">Home</a>
+                <a href="getting-started.html">Getting Started</a>
+                <a href="features.html">Features</a>
+                <a href="components.html">Components</a>
+                <a href="security.html">Security</a>
+                <a href="support.html">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Mini-Apps</div>
+                <ul class="sidebar-nav">
+                    <li><a href="#overview" class="active"><span class="icon">&#128218;</span> Overview</a></li>
+                    <li><a href="#architecture"><span class="icon">&#127959;</span> Architecture</a></li>
+                    <li><a href="#lifecycle"><span class="icon">&#128257;</span> Lifecycle</a></li>
+                    <li><a href="#launching"><span class="icon">&#128640;</span> Launching</a></li>
+                    <li><a href="#communication"><span class="icon">&#128279;</span> Communication</a></li>
+                    <li><a href="#security"><span class="icon">&#128274;</span> Security</a></li>
+                    <li><a href="#testing"><span class="icon">&#128295;</span> Testing</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <span>Mini-Apps</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Mini-Apps (SuperApp)</h1>
+                <p class="page-subtitle">Build and deploy mini-applications within a single native container using the SuperApp architecture.</p>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>What are Mini-Apps?</h2>
+                <p>Mini-apps are lightweight applications that run within a host "SuperApp" container. This architecture allows organizations to build an ecosystem of services accessible from a single application, reducing the need for users to install multiple apps.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#128241;</div>
+                        <h3 class="card-title">Single Container</h3>
+                        <p class="card-description">Run multiple mini-apps within one native application, sharing resources and providing a unified experience.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#9889;</div>
+                        <h3 class="card-title">Instant Updates</h3>
+                        <p class="card-description">Update mini-app content without app store releases, enabling rapid feature deployment.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#128274;</div>
+                        <h3 class="card-title">Isolated Environment</h3>
+                        <p class="card-description">Each mini-app runs in isolation with controlled access to native capabilities.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon orange">&#128176;</div>
+                        <h3 class="card-title">Payment Support</h3>
+                        <p class="card-description">Built-in payment processing capabilities for e-commerce mini-apps.</p>
+                    </div>
+                </div>
+
+                <div class="info-box note">
+                    <div class="info-box-icon">&#128161;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">SuperApp Model</div>
+                        <div class="info-box-text">The SuperApp model, popularized by apps like WeChat and Grab, allows a single app to serve as a platform for multiple services including payments, shopping, utilities, and more.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture Section -->
+            <section id="architecture">
+                <h2>Architecture</h2>
+                <p>Quick SDK's mini-app architecture consists of several key components working together to provide a seamless experience.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-title">SuperApp Container</div>
+                        <div class="timeline-text">The native Android application that hosts and manages all mini-apps. It provides the runtime environment, native bridge, and shared services.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">WebView Runtime</div>
+                        <div class="timeline-text">Mini-apps run within optimized WebView containers, providing web-based rendering with native performance through the Quick Bridge.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Quick Bridge</div>
+                        <div class="timeline-text">The communication layer between mini-app JavaScript and native Android capabilities, with 186+ API methods available.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">App Registry</div>
+                        <div class="timeline-text">Central registry managing mini-app configurations, permissions, and routing information.</div>
+                    </div>
+                </div>
+
+                <h3>Key Benefits</h3>
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Shared Resources</h4>
+                            <p>Mini-apps share common resources like authentication, user profiles, and native capabilities, reducing redundancy.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Consistent Experience</h4>
+                            <p>Users enjoy a unified look and feel across all mini-apps with shared theming and navigation patterns.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#10003;</div>
+                        <div class="feature-content">
+                            <h4>Centralized Management</h4>
+                            <p>Administrators can manage all mini-apps from a central portal, controlling access, updates, and analytics.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Lifecycle Section -->
+            <section id="lifecycle">
+                <h2>Mini-App Lifecycle</h2>
+                <p>Understanding the mini-app lifecycle helps in building robust applications that handle all states correctly.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>State</th>
+                                <th>Description</th>
+                                <th>Actions Available</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Loading</strong></td>
+                                <td>Mini-app is being loaded from server or cache</td>
+                                <td>Show loading indicator</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Initializing</strong></td>
+                                <td>Resources are being initialized, bridge connected</td>
+                                <td>Setup event listeners</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ready</strong></td>
+                                <td>Mini-app is fully loaded and interactive</td>
+                                <td>Full functionality available</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Background</strong></td>
+                                <td>User navigated away, app is paused</td>
+                                <td>Save state, pause operations</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Resumed</strong></td>
+                                <td>User returned, app is active again</td>
+                                <td>Restore state, resume operations</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Closed</strong></td>
+                                <td>Mini-app is being terminated</td>
+                                <td>Cleanup, save persistent data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-icon">&#128161;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">State Persistence</div>
+                        <div class="info-box-text">Use the SDK's storage APIs to persist important state data, ensuring users don't lose their progress when switching between mini-apps.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Launching Section -->
+            <section id="launching">
+                <h2>Launching Mini-Apps</h2>
+                <p>Mini-apps can be launched through various methods depending on your use case.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#128196;</div>
+                        <h3 class="card-title">App ID Launch</h3>
+                        <p class="card-description">Launch mini-apps using their unique identifier for direct navigation within the SuperApp.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">&#128247;</div>
+                        <h3 class="card-title">QR Code Launch</h3>
+                        <p class="card-description">Scan QR codes to instantly open specific mini-apps with optional parameters.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">&#128279;</div>
+                        <h3 class="card-title">Deep Link Launch</h3>
+                        <p class="card-description">Use URL schemes to launch mini-apps from external sources or push notifications.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon orange">&#128193;</div>
+                        <h3 class="card-title">Published Apps</h3>
+                        <p class="card-description">Launch production mini-apps from the app registry with version management.</p>
+                    </div>
+                </div>
+
+                <h3>Launch Parameters</h3>
+                <p>When launching a mini-app, you can pass various parameters:</p>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        App ID
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Custom Parameters
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        User Context
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Theme Preferences
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Deep Link Data
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Return Callback
+                    </div>
+                </div>
+            </section>
+
+            <!-- Communication Section -->
+            <section id="communication">
+                <h2>Communication</h2>
+                <p>Mini-apps communicate with the host SuperApp and backend services through well-defined channels.</p>
+
+                <h3>Host Communication</h3>
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#128279;</div>
+                        <div class="feature-content">
+                            <h4>Bridge API</h4>
+                            <p>Access native capabilities through the Quick Bridge's 186+ methods for storage, networking, device features, and more.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128279;</div>
+                        <div class="feature-content">
+                            <h4>Host Triggers</h4>
+                            <p>Send events to the host app to request actions like navigation, payment processing, or authentication.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128279;</div>
+                        <div class="feature-content">
+                            <h4>Shared Storage</h4>
+                            <p>Access shared data like user profiles and preferences that persist across mini-apps.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <h3>Backend Communication</h3>
+                <p>Mini-apps can communicate with their backend services through:</p>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        HTTP Requests (GET, POST, PUT, DELETE)
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Secure SSL/TLS Connections
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Request/Response Caching
+                    </div>
+                    <div class="capability-item">
+                        <span class="capability-check">&#10003;</span>
+                        Error Handling & Retry
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Section -->
+            <section id="security">
+                <h2>Mini-App Security</h2>
+                <p>Security is paramount in a multi-app environment. Quick SDK provides multiple security layers for mini-apps.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon red">&#128274;</div>
+                        <h3 class="card-title">App Isolation</h3>
+                        <p class="card-description">Each mini-app runs in an isolated environment, preventing unauthorized access to other apps' data.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon red">&#128272;</div>
+                        <h3 class="card-title">Permission Control</h3>
+                        <p class="card-description">Granular control over which bridge methods each mini-app can access.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon red">&#128203;</div>
+                        <h3 class="card-title">Code Signing</h3>
+                        <p class="card-description">Mini-app packages are signed and verified before execution.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon red">&#128451;</div>
+                        <h3 class="card-title">Encrypted Storage</h3>
+                        <p class="card-description">Sensitive mini-app data is encrypted using AES-256 encryption.</p>
+                    </div>
+                </div>
+
+                <h3>Permission Scopes</h3>
+                <p>Mini-apps can be granted different permission levels:</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Scope</th>
+                                <th>Access Level</th>
+                                <th>Example Capabilities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Basic</strong></td>
+                                <td>Limited</td>
+                                <td>UI components, basic storage, navigation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Standard</strong></td>
+                                <td>Normal</td>
+                                <td>Network requests, location, camera</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Extended</strong></td>
+                                <td>Elevated</td>
+                                <td>Payments, biometrics, encrypted storage</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Full</strong></td>
+                                <td>Complete</td>
+                                <td>All bridge methods, native navigation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Testing Section -->
+            <section id="testing">
+                <h2>Testing Mini-Apps</h2>
+                <p>Quick SDK provides comprehensive tools for testing mini-apps during development.</p>
+
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">&#128295;</div>
+                        <div class="feature-content">
+                            <h4>MiniApp Tester</h4>
+                            <p>Dedicated testing application for loading and testing mini-apps in development without deploying to production.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128295;</div>
+                        <div class="feature-content">
+                            <h4>QR Code Testing</h4>
+                            <p>Generate QR codes to quickly load and test mini-apps on physical devices during development.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128295;</div>
+                        <div class="feature-content">
+                            <h4>Mobile Preview</h4>
+                            <p>Real-time preview of mini-apps during development with hot reload capabilities.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">&#128295;</div>
+                        <div class="feature-content">
+                            <h4>Debug Logging</h4>
+                            <p>Comprehensive logging for bridge calls, network requests, and errors during development.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="info-box warning">
+                    <div class="info-box-icon">&#9888;</div>
+                    <div class="info-box-content">
+                        <div class="info-box-title">Production Testing</div>
+                        <div class="info-box-text">Always test mini-apps thoroughly in a staging environment before deploying to production to ensure stability and security.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-logo">Quick SDK by Softtech</div>
+                    <p class="footer-text">Plateau Studio Mobile Android SDK v1.7.9<br>&copy; 2024 Softtech. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>
