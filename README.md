@@ -10,23 +10,24 @@ A developer reading this document should be able to integrate the SDK and run Mi
 ## Table of Contents
 
 - [1. Scope](#1-scope)
-- [2. Quick Start](#2-quick-start)
-- [3. Mandatory Overrides](#3-mandatory-overrides)
-  - [3.1 onCreate](#31-oncreatesavedinstancestate)
-  - [3.2 onInitialized](#32-oninitializedclient-quickclient)
-  - [3.3 Fragment Navigation Management](#33-fragment-navigation-management-activitycontroller)
-  - [3.4 onBackPressed](#34-onbackpressed)
-  - [3.5 stopMiniApp / release](#35-stopminiapp--release)
-  - [3.6 onDestroy](#36-ondestroy)
-  - [3.7 onNewIntent](#37-onnewintentintent-recommended)
-- [4. Host Activity Template (Copy & Use)](#4-host-activity-template-copy--use)
-- [5. Optional JS → Native Bridge](#5-optional-js--native-bridge)
-  - [5.1 callFunction Example](#51-callfunction-example-getdeviceid)
-  - [5.2 callTokenFunction Example](#52-calltokenfunction-example-bi_frost)
-- [6. Optional Modules](#6-optional-modules)
-- [7. Recommended Architecture (Provider/Bridge Pattern)](#7-recommended-architecture-providerbridge-pattern)
-- [8. Troubleshooting](#8-troubleshooting)
-- [9. Integration Checklist](#9-integration-checklist)
+- [2. Installation](#1-installation)
+- [3. Quick Start](#3-quick-start)
+- [4. Mandatory Overrides](#4-mandatory-overrides)
+  - [4.1 onCreate](#41-oncreatesavedinstancestate)
+  - [4.2 onInitialized](#42-oninitializedclient-quickclient)
+  - [4.3 Fragment Navigation Management](#43-fragment-navigation-management-activitycontroller)
+  - [4.4 onBackPressed](#44-onbackpressed)
+  - [4.5 stopMiniApp / release](#45-stopminiapp--release)
+  - [4.6 onDestroy](#46-ondestroy)
+  - [4.7 onNewIntent](#47-onnewintentintent-recommended)
+- [5. Host Activity Template (Copy & Use)](#5-host-activity-template-copy--use)
+- [6. Optional JS → Native Bridge](#6-optional-js--native-bridge)
+  - [6.1 callFunction Example](#61-callfunction-example-getdeviceid)
+  - [6.2 callTokenFunction Example](#62-calltokenfunction-example-bi_frost)
+- [7. Optional Modules](#7-optional-modules)
+- [8. Recommended Architecture (Provider/Bridge Pattern)](#8-recommended-architecture-providerbridge-pattern)
+- [9. Troubleshooting](#9-troubleshooting)
+- [10. Integration Checklist](#10-integration-checklist)
 
 ---
 
@@ -54,7 +55,29 @@ These depend on the host application needs:
 
 ---
 
-# 2. Quick Start
+# 2. Installation
+
+## Gradle (Groovy DSL)
+
+Add the dependency to your `app/build.gradle`:
+```groovy
+dependencies {
+    implementation 'com.softtech.quick.sdk:plateausdk:1.7.9.015'
+}
+```
+
+## Maven
+```xml
+<dependency>
+  <groupId>com.softtech.quick.sdk</groupId>
+  <artifactId>plateausdk</artifactId>
+  <version>1.7.9.015</version>
+</dependency>
+```
+
+---
+
+# 3. Quick Start
 
 1. Create an Activity in your application (ex: `MiniAppHostActivity`)
 2. Start this Activity with either:
@@ -80,11 +103,11 @@ quickService.render(pageName, paramsObject)
 
 ---
 
-# 3. Mandatory Overrides
+# 4. Mandatory Overrides
 
 ---
 
-## 3.1 onCreate(savedInstanceState)
+## 4.1 onCreate(savedInstanceState)
 
 ### Purpose
 - Resolve MiniApp parameters from Intent
@@ -117,7 +140,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 ---
 
-## 3.2 onInitialized(client: QuickClient)
+## 4.2 onInitialized(client: QuickClient)
 
 ### Purpose
 Quick runtime calls this callback when it is ready.
@@ -144,7 +167,7 @@ override fun onInitialized(client: QuickClient) {
 
 ---
 
-## 3.3 Fragment Navigation Management (ActivityController)
+## 4.3 Fragment Navigation Management (ActivityController)
 
 ### Purpose
 Quick framework creates `QFragment` objects and expects the host app to display them using `FragmentManager`.
@@ -162,7 +185,7 @@ Quick framework creates `QFragment` objects and expects the host app to display 
 
 ---
 
-## 3.4 onBackPressed()
+## 4.4 onBackPressed()
 
 ### Purpose
 - MiniApp navigation is handled internally by Quick
@@ -186,7 +209,7 @@ override fun onBackPressed() {
 
 ---
 
-## 3.5 stopMiniApp / release
+## 4.5 stopMiniApp / release
 
 ### Purpose
 MiniApp must release Quick runtime properly.
@@ -205,7 +228,7 @@ private fun release() {
 
 ---
 
-## 3.6 onDestroy()
+## 4.6 onDestroy()
 
 ### Purpose
 Prevent memory leaks and release Quick runtime.
@@ -220,7 +243,7 @@ override fun onDestroy() {
 
 ---
 
-## 3.7 onNewIntent(intent) (Recommended)
+## 4.7 onNewIntent(intent) (Recommended)
 
 ### Purpose
 If your MiniApp supports NFC or intent-based events, you should forward new intents to the active fragment.
@@ -244,7 +267,7 @@ If you don’t use NFC or intent events, this method may not be required.
 
 ---
 
-# 4. Host Activity Template (Copy & Use)
+# 5. Host Activity Template (Copy & Use)
 
 > `setContentView(...)` and `containerId` are NOT fixed.  
 > Every company defines its own layout and fragment container.
@@ -377,7 +400,7 @@ Example:
 
 ---
 
-# 5. Optional JS → Native Bridge
+# 6. Optional JS → Native Bridge
 
 `callFunction` and `callTokenFunction` are optional.
 
@@ -385,7 +408,7 @@ However, it is recommended to provide at least one example for integration clari
 
 ---
 
-## 5.1 callFunction Example (GetDeviceId)
+## 6.1 callFunction Example (GetDeviceId)
 
 ### Scenario
 MiniApp requests a unique device identifier.
@@ -419,7 +442,7 @@ override fun callFunction(
 
 ---
 
-## 5.2 callTokenFunction Example (BI_FROST)
+## 6.2 callTokenFunction Example (BI_FROST)
 
 ### Scenario
 MiniApp requests token via special token channel.
@@ -456,7 +479,7 @@ override fun callTokenFunction(
 
 ---
 
-# 6. Optional Modules
+# 7. Optional Modules
 
 These features are **optional** and should be integrated only if required by the host application.
 
@@ -484,7 +507,7 @@ These features are **optional** and should be integrated only if required by the
 
 ---
 
-# 7. Recommended Architecture (Provider/Bridge Pattern)
+# 8. Recommended Architecture (Provider/Bridge Pattern)
 
 To prevent the host Activity from becoming too large, it is recommended to isolate optional features into provider interfaces.
 
@@ -502,7 +525,7 @@ With this design:
 
 ---
 
-# 8. Troubleshooting
+# 9. Troubleshooting
 
 ### MiniApp screen is blank / not rendering
 - Is `onInitialized(client)` called?
@@ -527,7 +550,7 @@ With this design:
 
 ---
 
-# 9. Integration Checklist
+# 10. Integration Checklist
 
 ☑ MiniAppID or StartMiniAppParams is passed via Intent  
 ☑ `MiniAppSdk.initialize(...)` is called inside `onCreate`  
