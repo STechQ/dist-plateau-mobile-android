@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: STechQ/dist-plateau-mobile-android
+  repo: stechq/dist-plateau-mobile-android
   branch: main
   base_url: https://api.netlify.com/docs
   auth_endpoint: auth
