@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: STechQ/dist-plateau-mobile-android
+  branch: main
+  base_url: https://api.netlify.com/docs
+  auth_endpoint: auth
+
+media_folder: "docs/assets/images"       # repodaki gerçek yol
+public_folder: "docs/assets/images"          # tarayıcıdan erişim yolu
+
+collections:
+  - name: "docs"
+    label: "Dökümanlar"
+    folder: "docs/_content/docs"         # repodaki gerçek yol
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Başlık", name: "title", widget: "string" }
+      - { label: "İçerik", name: "body", widget: "markdown" }
+      - { label: "Tarih", name: "date", widget: "datetime" }
