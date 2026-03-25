@@ -2,7 +2,7 @@ backend:
   name: github
   repo: stechq/dist-plateau-mobile-android
   branch: main
-  base_url: https://glowing-dieffenbachia-02293a.netlify.app/
+  base_url: https://api.netlify.com
   auth_endpoint: auth
 
 media_folder: "docs/assets/images"
