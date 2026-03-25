@@ -4,6 +4,7 @@ backend:
   branch: main
   base_url: https://api.netlify.com
   auth_endpoint: auth
+  site_domain: stechq.github.io
 
 media_folder: "docs/assets/images"
 public_folder: "docs/assets/images"
