@@ -2,8 +2,6 @@ backend:
   name: github
   repo: stechq/dist-plateau-mobile-android
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
 
 media_folder: "docs/assets/images"
 public_folder: "docs/assets/images"
