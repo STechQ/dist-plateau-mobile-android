@@ -62,7 +62,7 @@ These depend on the host application needs:
 Add the dependency to your `app/build.gradle`:
 ```groovy
 dependencies {
-    implementation 'com.softtech.quick.sdk:plateausdk:1.7.9.015'
+    implementation 'com.softtech.quick.sdk:plateausdk:1.8.0.012'
 }
 ```
 
@@ -71,7 +71,7 @@ dependencies {
 <dependency>
   <groupId>com.softtech.quick.sdk</groupId>
   <artifactId>plateausdk</artifactId>
-  <version>1.7.9.015</version>
+  <version>1.8.0.012</version>
 </dependency>
 ```
 
