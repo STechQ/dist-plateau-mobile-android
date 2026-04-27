@@ -57,6 +57,27 @@ These depend on the host application needs:
 
 # 2. Installation
 
+## Prerequisites
+
+Open your root `settings.gradle` and add the following inside `dependencyResolutionManagement`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+        maven {
+            url = uri("https://maven.pkg.github.com/STechQ/dist-plateau-mobile-android")
+            credentials {
+                username = "USERNAME"
+                password = "PASSWORD"
+            }
+        }
+    }
+}
+```
+
 ## Gradle (Groovy DSL)
 
 Add the dependency to your `app/build.gradle`:
