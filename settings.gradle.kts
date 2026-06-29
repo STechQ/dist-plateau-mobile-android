@@ -1,0 +1,25 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+        maven {
+            url = uri("https://maven.pkg.github.com/STechQ/dist-plateau-mobile-android")
+            credentials {
+                username = providers.gradleProperty("GITHUB_USER").orNull
+                password = providers.gradleProperty("GITHUB_TOKEN").orNull
+            }
+        }
+    }
+}
+
+rootProject.name = "PlateauSuperApp"
+include(":app")

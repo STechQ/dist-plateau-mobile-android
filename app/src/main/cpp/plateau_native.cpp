@@ -1,0 +1,37 @@
+#include <jni.h>
+#include <string>
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_softtech_plateausuperapp_PlateauNativeConstants_baseDomain(JNIEnv *env, jclass clazz) {
+    std::string domain = "mobiltest.isbank.com.tr";
+    return env->NewStringUTF(domain.c_str());
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_softtech_plateausuperapp_PlateauNativeConstants_certificate(JNIEnv *env, jclass clazz) {
+    std::string certificate = "-----BEGIN CERTIFICATE-----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-----END CERTIFICATE-----";
+    return env->NewStringUTF(certificate.c_str());
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_softtech_plateausuperapp_PlateauNativeConstants_certificateId(JNIEnv *env, jclass clazz) {
+    std::string id = "9F410720-84B1-403F-AE19-17CF2738784A";
+    return env->NewStringUTF(id.c_str());
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_softtech_plateausuperapp_PlateauNativeConstants_serviceBaseUrl(JNIEnv *env, jclass clazz) {
+    std::string url = "https://mobiltest.isbank.com.tr/superapp-backend/api/2/v1/";
+    return env->NewStringUTF(url.c_str());
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_softtech_plateausuperapp_PlateauNativeConstants_jsonBaseUrl(JNIEnv *env, jclass clazz) {
+    std::string url = "https://mobiltest.isbank.com.tr/superapp-backend/api/2/v1/MiniApp";
+    return env->NewStringUTF(url.c_str());
+}
