@@ -84,6 +84,9 @@ android {
     compileOptions {
         coreLibraryDesugaringEnabled true
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
