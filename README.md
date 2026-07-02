@@ -453,7 +453,7 @@ class MiniAppHostActivity :
             }
 
             fragmentTransaction.addToBackStack(tag);
-            fragmentTransaction.add(R.id.q_content_fragment_layout, fragment, tag);
+            fragmentTransaction.add(R.id.your_FragmentContainerView_id, fragment, tag);
 
             if (!fragment.isStateSaved()) {
                 fragmentTransaction.commit();
