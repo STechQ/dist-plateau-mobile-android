@@ -321,6 +321,7 @@ class MiniAppHostActivity :
 
     private var quickService: QuickService? = null
     private var intentParams: StartMiniAppParams? = null
+    private var networkLogger: NetworkLogger? = null
 
     // Host application defines these
     @LayoutRes
@@ -338,10 +339,69 @@ class MiniAppHostActivity :
                 ?: intent.getStringExtra(KEY_MINI_APP_ID)
                     ?.let { StartMiniAppParams(it, null, null) }
 
-        val language = LanguageUtil.getLanguageIdentifier(this)
+        if (savedInstanceState == null && intent.hasExtra(KEY_PARAMS)) {
+            intentParams = intent.getSerializableExtra(KEY_PARAMS) as? StartMiniAppParams
+        }
+
+        // The if block below was added for testing purposes. App ID can be tested by entering it manually.
+        // However, you must have the app id when starting this activity.
+        if (intentParams == null) {
+            intentParams = new StartMiniAppParams("TEST_APP_ID", null, null);
+        }
 
         // Quick runtime initializes automatically inside initialize()
-        intentParams?.let { MiniAppSdk.initialize(it, language, this) }
+        val config = QuickConfig()
+        val context: QuickContext = object : QuickContext {
+            override fun getAndroidApplication(): Application {
+                return getApplication()
+            }
+
+            override fun getAndroidActivity(): AppCompatActivity {
+                return this@MainActivity
+            }
+        }
+
+        config.setContext(context)
+        config.setJsonBaseUrl("JSON_BASE_URL")
+        config.setServiceBaseUrl("SERVICE_BASE_URL")
+        config.setCallbackListener(this)
+        config.setAppId(intentParams?.appId)
+        config.setIntentParams(intentParams)
+        config.setFunctionCallTimeoutSeconds(60L)
+        initQuickService(config)
+        QuickInitializer.initialize(config, this)
+    }
+
+    private fun initQuickService(config: QuickConfig) {
+
+        val sslPinningConfig = DefaultSslPinningConfig.Builder()
+            .withSslPemFile("CERTIFICATE_CONTENT)
+            .withDomain("CERTIFICATE_DOMAIN")
+            .withCertificateId("CERTIFICATE_DOMAIN")
+            .build()
+
+        val platformInfo = QPlatform(getBaseContext()).getPlatFormInfo()
+        networkLogger = NetworkLogger(
+            MiniAppHttpRequestLogCollector(
+                config.getServiceBaseUrl(), config.getAppId(), platformInfo
+            )
+        )
+
+        val builder = QuickSdk.Builder.newInstance()
+            .setAppId(config.getAppId())
+            .maxRequestRetryCount(0)
+            .setLanguage("tr-TR")
+            .setSettingsUrl(null)
+            .useEncrypt(true)
+            .setClientCustomFunctionTriggerListener(this)
+            .timeOutRequestSeconds(60)
+            .addSslPinningConfig(sslPinningConfig)
+            .setBaseUrl(config.getServiceBaseUrl())
+            .setRuntimePermissionCaller(this)
+            .setPlatFormInfo(platformInfo)
+            .setHttpInterceptorListener(networkLogger)
+
+        config.setQuickBuilder(builder)
     }
 
     override fun onInitialized(client: QuickClient) {
@@ -365,14 +425,42 @@ class MiniAppHostActivity :
 
     override fun onQuickFragmentCreatedWithAnimation(
         addToBackStack: Boolean,
-        fragment: QFragment?,
+        fragment: QFragment,
         tag: String?,
         pageTransitionAnimation: Animation?
     ) {
-        // Host app must implement:
-        // 1) Hide current QFragment
-        // 2) Add new fragment into containerId
-        // 3) Apply animations if needed
+        if (!isFinishing()) {
+
+            val fragmentTransaction: FragmentTransaction = getSupportFragmentManager().beginTransaction()
+
+            if (pageTransitionAnimation != null) {
+                if (pageTransitionAnimation.isInAnimation()) {
+                    fragmentTransaction.setCustomAnimations(pageTransitionAnimation.getEnterAnim(), 0, pageTransitionAnimation.getExitAnim(), 0)
+                } else {
+                    fragmentTransaction.setCustomAnimations(pageTransitionAnimation.getExitAnim(), 0, pageTransitionAnimation.getEnterAnim(), 0)
+                }
+            }
+
+            val fragmentsSize = getSupportFragmentManager().getFragments().size
+
+            if (fragmentsSize > 0) {
+                val currentFragment: Fragment =
+                        getSupportFragmentManager().getFragments().get(fragmentsSize - 1);
+
+                if (currentFragment is QFragment) {
+                    fragmentTransaction.hide(currentFragment);
+                }
+            }
+
+            fragmentTransaction.addToBackStack(tag);
+            fragmentTransaction.add(R.id.q_content_fragment_layout, fragment, tag);
+
+            if (!fragment.isStateSaved()) {
+                fragmentTransaction.commit();
+            } else {
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        }
     }
 
     override fun onQuickBackPressed() {
@@ -382,10 +470,8 @@ class MiniAppHostActivity :
 
     @Suppress("MissingSuperCall")
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount <= 1) {
-            quickService?.release()
-            quickService = null
-            finish()
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            stopMiniApp()
             return
         }
 
@@ -404,15 +490,74 @@ class MiniAppHostActivity :
         return true
     }
 
+    override fun setAppId(appId: String) {
+        QuickInitializer.setMiniAppAppId(appId)
+    }
+
+    override fun startMiniApp(params: StartMiniAppParams) {
+        val intent: Intent = newIntent(this, params)
+        startActivity(intent)
+    }
+
+    override fun stopMiniApp() {
+        release()
+        finish()
+    }
+
     override fun onDestroy() {
+        super.onDestroy()
+        release()
+    }
+
+    override fun onStop() {
+        if (networkLogger != null) {
+            networkLogger!!.getLogCollector().sendLogsToApi();
+        }
+        super.onStop();
+    }
+
+    override fun getAndroidApplication(): Application? {
+        return getApplication();
+    }
+
+    override fun callFunction(
+        functionName: String?,
+        params: QV8Element?,
+        resultListener: QuickService.FunctionCallBackListener?
+    ): Boolean {
+        return false
+    }
+
+    override fun callTokenFunction(
+        functionName: String?,
+        params: QV8Element?,
+        resultListener: QuickService.FunctionCallBackListener?
+    ): Boolean {
+        return false
+    }
+
+    private fun release() {
         quickService?.release()
         quickService = null
-        super.onDestroy()
     }
 
     companion object {
         private const val KEY_MINI_APP_ID = "MiniAppID"
         private const val KEY_PARAMS = "startMiniAppParams"
+
+        fun newIntent(context: Context?, appId: String): Intent {
+            val intent = Intent(context, MiniAppHostActivity::class.java)
+            val bundle = bundleOf(KEY_MINI_APP_ID to appId)
+            intent.putExtras(bundle)
+            return intent
+        }
+
+        fun newIntent(context: Context?, params: StartMiniAppParams): Intent {
+            val intent = Intent(context, MiniAppHostActivity::class.java)
+            val bundle = bundleOf(KEY_PARAMS to params)
+            intent.putExtras(bundle)
+            return intent
+        }
     }
 }
 ```
