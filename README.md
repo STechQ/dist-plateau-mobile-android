@@ -108,7 +108,7 @@ dependencies {
 <dependency>
   <groupId>com.softtech.quick.sdk</groupId>
   <artifactId>plateausdk</artifactId>
-  <version>1.8.0.012</version>
+  <version>1.8.2.022</version>
 </dependency>
 ```
 
