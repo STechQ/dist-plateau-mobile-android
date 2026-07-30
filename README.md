@@ -99,7 +99,7 @@ dependencies {
 Add the dependency to your `app/build.gradle`:
 ```groovy
 dependencies {
-    implementation 'com.softtech.quick.sdk:plateausdk:1.8.0.012'
+    implementation 'com.softtech.quick.sdk:plateausdk:1.8.2.022'
 }
 ```
 
