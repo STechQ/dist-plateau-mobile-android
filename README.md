@@ -9,24 +9,50 @@ A developer reading this document should be able to integrate the SDK and run Mi
 
 ## Table of Contents
 
+- [MiniApp SDK – Integration Guide (Host Application)](#miniapp-sdk--integration-guide-host-application)
+  - [Table of Contents](#table-of-contents)
 - [1. Scope](#1-scope)
-- [2. Installation](#1-installation)
+    - [Mandatory parts](#mandatory-parts)
+    - [Optional parts](#optional-parts)
+- [2. Installation](#2-installation)
+  - [Prerequisites](#prerequisites)
+  - [Gradle (Groovy DSL)](#gradle-groovy-dsl)
+  - [Maven](#maven)
 - [3. Quick Start](#3-quick-start)
 - [4. Mandatory Overrides](#4-mandatory-overrides)
-  - [4.1 onCreate](#41-oncreatesavedinstancestate)
-  - [4.2 onInitialized](#42-oninitializedclient-quickclient)
-  - [4.3 Fragment Navigation Management](#43-fragment-navigation-management-activitycontroller)
-  - [4.4 onBackPressed](#44-onbackpressed)
+  - [4.1 onCreate(savedInstanceState)](#41-oncreatesavedinstancestate)
+    - [Purpose](#purpose)
+    - [Expected behavior](#expected-behavior)
+  - [4.2 onInitialized(client: QuickClient)](#42-oninitializedclient-quickclient)
+    - [Purpose](#purpose-1)
+    - [Expected behavior](#expected-behavior-1)
+  - [4.3 Fragment Navigation Management (ActivityController)](#43-fragment-navigation-management-activitycontroller)
+    - [Purpose](#purpose-2)
+    - [Mandatory methods](#mandatory-methods)
+    - [Expected behavior](#expected-behavior-2)
+  - [4.4 onBackPressed()](#44-onbackpressed)
+    - [Purpose](#purpose-3)
+    - [Recommended behavior](#recommended-behavior)
   - [4.5 stopMiniApp / release](#45-stopminiapp--release)
-  - [4.6 onDestroy](#46-ondestroy)
-  - [4.7 onNewIntent](#47-onnewintentintent-recommended)
-- [5. Host Activity Template (Copy & Use)](#5-host-activity-template-copy--use)
+    - [Purpose](#purpose-4)
+  - [4.6 onDestroy()](#46-ondestroy)
+    - [Purpose](#purpose-5)
+  - [4.7 onNewIntent(intent) (Recommended)](#47-onnewintentintent-recommended)
+    - [Purpose](#purpose-6)
+- [5. Host Activity Template (Copy \& Use)](#5-host-activity-template-copy--use)
+  - [ContainerId Recommendation](#containerid-recommendation)
 - [6. Optional JS → Native Bridge](#6-optional-js--native-bridge)
-  - [6.1 callFunction Example](#61-callfunction-example-getdeviceid)
-  - [6.2 callTokenFunction Example](#62-calltokenfunction-example-bi_frost)
+  - [6.1 callFunction Example (GetDeviceId)](#61-callfunction-example-getdeviceid)
+    - [Scenario](#scenario)
+  - [6.2 callTokenFunction Example (BI\_FROST)](#62-calltokenfunction-example-bi_frost)
+    - [Scenario](#scenario-1)
 - [7. Optional Modules](#7-optional-modules)
 - [8. Recommended Architecture (Provider/Bridge Pattern)](#8-recommended-architecture-providerbridge-pattern)
 - [9. Troubleshooting](#9-troubleshooting)
+    - [MiniApp screen is blank / not rendering](#miniapp-screen-is-blank--not-rendering)
+    - [Back button does not work](#back-button-does-not-work)
+    - [callFunction callback does not return (optional)](#callfunction-callback-does-not-return-optional)
+    - [Permission request does not work](#permission-request-does-not-work)
 - [10. Integration Checklist](#10-integration-checklist)
 
 ---
@@ -99,7 +125,7 @@ dependencies {
 Add the dependency to your `app/build.gradle`:
 ```groovy
 dependencies {
-    implementation 'com.softtech.quick.sdk:plateausdk:1.8.2.022'
+    implementation 'com.softtech.quick.sdk:plateausdk:1.8.2.028'
 }
 ```
 
@@ -108,7 +134,7 @@ dependencies {
 <dependency>
   <groupId>com.softtech.quick.sdk</groupId>
   <artifactId>plateausdk</artifactId>
-  <version>1.8.2.022</version>
+  <version>1.8.2.028</version>
 </dependency>
 ```
 
