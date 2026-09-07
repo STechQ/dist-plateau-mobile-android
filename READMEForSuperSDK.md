@@ -23,7 +23,19 @@
 *Libraries*
 
     // Plateau Mobile SDK Files
-    implementation 'com.softtech.quick.sdk:plateausdk:7.3.0-alpha.32'
+    implementation 'com.softtech.quick.sdk:plateausdk:1.8.3.003'
+
+*Compile Options*
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    dependencies {
+        coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
+    }
 
 **2. Software Requirements and Tools IDE: Android Studio  Lang: Java,Kotlin**
 
@@ -31,23 +43,33 @@
 ```kotlin
 class MainActivity :
     AppCompatActivity(),
-    ScreenNavController,
+    ActivityController,
     QuickClientCallbackListener,
-    QuickClient.InitializerListener
+    QuickClient.InitializerListener,
+    QRuntimePermissionHandler
 
     private lateinit var lottieAnimationView: LottieAnimationView
-    private var baseUrl = "https://*********..."
+    private var serviceBaseUrl = "https://*********..."
+    private var jsonBaseUrl = "https://*********..."
     private var appId = "************..."
-    private var settingsUrl = "settings/settings_mobile.json"
     private var quickService: QuickService? = null
     private var applicationName = ""
     private var networkLogger: NetworkLogger? = null
+    private var intentParams: StartMiniAppParams? = null
+    private var permissionListener: QRuntimePermissionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        SoLoader.init(androidApplication, false)
+        if (savedInstanceState == null && intent.hasExtra(KEY_PARAMS)) {
+            intentParams = intent.getSerializableExtra(KEY_PARAMS) as? StartMiniAppParams
+        }
+        if (intentParams == null) {
+            intentParams = StartMiniAppParams(appId, null, null)
+        }
+
+        SoLoader.init(application, false)
         lottieAnimationView = findViewById(R.id.lottieLoading)
 
         val config = QuickConfig()
@@ -57,27 +79,41 @@ class MainActivity :
             }
 
             override fun getAndroidApplication(): Application {
-                return androidApplication
+                return application
             }
         }
 
         config.context = context
-        config.baseUrl = baseUrl
-        config.appId = appId
+        config.serviceBaseUrl = serviceBaseUrl
+        config.jsonBaseUrl = jsonBaseUrl
+        config.appId = intentParams?.appId
         config.callbackListener = this
+        config.intentParams = intentParams
+        config.functionCallTimeoutSeconds = 60L
 
-        networkLogger = NetworkLogger(MiniAppHttpRequestLogCollector(config.appId))
+        val sslPinningConfig = DefaultSslPinningConfig.Builder()
+            .withSslPemFile("<certificate>")
+            .withDomain("<base-domain>")
+            .withCertificateId("<certificate-id>")
+            .build()
+        val platformInfo = QPlatform(baseContext).platFormInfo
+
+        networkLogger = NetworkLogger(MiniAppHttpRequestLogCollector(
+            config.serviceBaseUrl, config.appId, platformInfo
+        ))
         val builder = QuickSdk.Builder.newInstance()
-        builder.appId = config.AppId
+        builder.setAppId(intentParams?.appId)
         builder.maxRequestRetryCount(0)
-        builder.language = "tr-TR"
-        builder.settingsUrl = settingsUrl // If settingsUrl not provied set null.
-        builder.previewNetworkListener = null
-        builder.clientCustomFunctionTriggerListener = this
+        builder.setLanguage("tr-TR")
+        builder.setSettingsUrl(null) // If settingsUrl not provided set null.
+        builder.useEncrypt(true)
+        builder.setClientCustomFunctionTriggerListener(this)
         builder.timeOutRequestSeconds(60)
-        builder.baseUrl = config.baseUrl
+        builder.addSslPinningConfig(sslPinningConfig)
+        builder.setBaseUrl(config.serviceBaseUrl)
+        builder.setRuntimePermissionCaller(this)
         builder.setHttpInterceptorListener(networkLogger)
-        builder.setPlatformInfo(QPlatform(getBaseContext()).platformInfo)
+        builder.setPlatFormInfo(platformInfo)
         config.quickBuilder = builder
 
         QuickInitializer.initialize(config, this)
@@ -136,23 +172,11 @@ class MainActivity :
         })
     }
 
-    override fun setTheme(p0: QThemeAttributes) {
-        // no opt
-    }
-
     override fun getAndroidApplication(): Application {
         return application
     }
 
-    override fun setPageAndStatusColor(p0: MutableMap<String, Any>?) {
-        // no opt
-    }
-
-    override fun clickNavigation(p0: Any?) {
-        // no opt
-    }
-
-    override fun goNativePage(p0: String?, p1: MutableMap<String, Any>?, p2: String?) {
+    override fun goNativePage(p0: String?, p1: MutableMap<String, Any>?, p2: Animation?) {
         // no opt
     }
 
@@ -183,12 +207,13 @@ class MainActivity :
                 handled = true
             }
 
-            "GetEmailAddress" -> {
+            "GetMailAddress" -> {
                 v8Object.add("Email", "testemail@gmail.com")
                 handled = true
             }
             "GetPhoneNumber" -> {
                 v8Object.add("PhoneNumber", "905555555555")
+                handled = true
             }
 
             else -> Log.e("MyApp", "Default Case")
@@ -214,8 +239,13 @@ class MainActivity :
     override fun onInitialized(client: QuickClient) {
         if(client.quickService != null) {
             quickService = client.quickService
-            quickService?.injectActivity(this)
-            quickService?.render(client.pageLabel, null)
+
+            val paramsObject: QV8Object? = intentParams?.params?.let {
+                ObjectUtil.convertToObject(it).asQV8Object
+            }
+            val page = intentParams?.pageName ?: client.pageLabel
+            quickService?.render(page, paramsObject)
+
             applicationName = client.applicationName.orEmpty()
         }
     }
@@ -223,13 +253,17 @@ class MainActivity :
     private fun release() {
         quickService?.release()
         quickService = null
+        QuickInitializer.release()
     }
 
     override fun onStop() {
-        if (networkLogger != null) {
-            networkLogger!!.logCollector.sendLogsToApi()
-        }
+        networkLogger?.logCollector?.sendLogsToApi()
         super.onStop()
+    }
+
+    companion object {
+        private const val KEY_PARAMS = "startMiniAppParams"
+        private const val REQUEST_PERMISSION_CODE = 1001
     }
 
 ```
@@ -290,16 +324,8 @@ Then the following methods should be overridden.
             permissionListener.onRuntimePermissionGranted(permission)
         } else {
             this.permissionListener = permissionListener
-            // request runtime permission
+            ActivityCompat.requestPermissions(this, permission, REQUEST_PERMISSION_CODE)
         }
-    }
-
-    override fun cancelPermission() {
-        // no-opt
-    }
-
-    override fun confirmPermission() {
-        // no-opt
     }
 
     override fun hasPermission(vararg p0: String): Boolean {
@@ -312,6 +338,21 @@ Then the following methods should be overridden.
             }
         }
         return true
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                permissionListener?.onRuntimePermissionGranted(permissions)
+            } else {
+                permissionListener?.onRuntimePermissionDenied(permissions)
+            }
+        }
     }
 ```
 

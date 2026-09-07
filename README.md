@@ -1,91 +1,37 @@
-# MiniApp SDK – Integration Guide (Host Application)
+# Plateau Android SDK – Integration Guide
 
-This document explains how to integrate **MiniApp SDK** into a host Android application.
+This document explains how to integrate the **Plateau Android SDK** (`com.softtech.quick.sdk:plateausdk`) into a host Android application.
 
-🎯 **Goal:**  
-A developer reading this document should be able to integrate the SDK and run MiniApp screens inside their own application with minimum effort.
+🎯 **Goal:** A developer should be able to integrate the SDK and render Plateau screens with minimum effort.
+
+> **Note:** For MiniApp (Super SDK) integration, see [READMEForSuperSDK.md](READMEForSuperSDK.md).
 
 ---
 
 ## Table of Contents
 
-- [MiniApp SDK – Integration Guide (Host Application)](#miniapp-sdk--integration-guide-host-application)
-  - [Table of Contents](#table-of-contents)
-- [1. Scope](#1-scope)
-    - [Mandatory parts](#mandatory-parts)
-    - [Optional parts](#optional-parts)
+- [1. Requirements](#1-requirements)
 - [2. Installation](#2-installation)
-  - [Prerequisites](#prerequisites)
-  - [Gradle (Groovy DSL)](#gradle-groovy-dsl)
-  - [Maven](#maven)
 - [3. Quick Start](#3-quick-start)
-- [4. Mandatory Overrides](#4-mandatory-overrides)
-  - [4.1 onCreate(savedInstanceState)](#41-oncreatesavedinstancestate)
-    - [Purpose](#purpose)
-    - [Expected behavior](#expected-behavior)
-  - [4.2 onInitialized(client: QuickClient)](#42-oninitializedclient-quickclient)
-    - [Purpose](#purpose-1)
-    - [Expected behavior](#expected-behavior-1)
-  - [4.3 Fragment Navigation Management (ActivityController)](#43-fragment-navigation-management-activitycontroller)
-    - [Purpose](#purpose-2)
-    - [Mandatory methods](#mandatory-methods)
-    - [Expected behavior](#expected-behavior-2)
-  - [4.4 onBackPressed()](#44-onbackpressed)
-    - [Purpose](#purpose-3)
-    - [Recommended behavior](#recommended-behavior)
-  - [4.5 stopMiniApp / release](#45-stopminiapp--release)
-    - [Purpose](#purpose-4)
-  - [4.6 onDestroy()](#46-ondestroy)
-    - [Purpose](#purpose-5)
-  - [4.7 onNewIntent(intent) (Recommended)](#47-onnewintentintent-recommended)
-    - [Purpose](#purpose-6)
-- [5. Host Activity Template (Copy \& Use)](#5-host-activity-template-copy--use)
-  - [ContainerId Recommendation](#containerid-recommendation)
-- [6. Optional JS → Native Bridge](#6-optional-js--native-bridge)
-  - [6.1 callFunction Example (GetDeviceId)](#61-callfunction-example-getdeviceid)
-    - [Scenario](#scenario)
-  - [6.2 callTokenFunction Example (BI\_FROST)](#62-calltokenfunction-example-bi_frost)
-    - [Scenario](#scenario-1)
-- [7. Optional Modules](#7-optional-modules)
-- [8. Recommended Architecture (Provider/Bridge Pattern)](#8-recommended-architecture-providerbridge-pattern)
-- [9. Troubleshooting](#9-troubleshooting)
-    - [MiniApp screen is blank / not rendering](#miniapp-screen-is-blank--not-rendering)
-    - [Back button does not work](#back-button-does-not-work)
-    - [callFunction callback does not return (optional)](#callfunction-callback-does-not-return-optional)
-    - [Permission request does not work](#permission-request-does-not-work)
-- [10. Integration Checklist](#10-integration-checklist)
+- [4. Mandatory Implementation](#4-mandatory-implementation)
+- [5. Optional JS → Native Bridge](#5-optional-js--native-bridge)
+- [6. Checklist](#6-checklist)
 
 ---
 
-# 1. Scope
+## 1. Requirements
 
-This guide covers integration of MiniApp SDK through a host Android `Activity`.
-
-### Mandatory parts
-These must be implemented for the SDK to work:
-
-- MiniApp initialization (`MiniAppSdk.initialize`)
-- Quick runtime callback (`onInitialized`)
-- Fragment management (`onQuickFragmentCreated*`)
-- Back handling (`onBackPressed`)
-- Resource cleanup (`onDestroy`)
-
-### Optional parts
-These depend on the host application needs:
-
-- JS → Native function bridge (`callFunction`)
-- Token bridge (`callTokenFunction`)
-- Seal / Document / Signature operations
-- Analytics integration
-- Customer information functions
+- Android Studio (latest stable)
+- Language: Java / Kotlin
+- Min SDK: 23, Target/Compile SDK: 34, JVM Target: 17
 
 ---
 
-# 2. Installation
+## 2. Installation
 
-## Prerequisites
+### settings.gradle.kts
 
-Open your root `settings.gradle` and add the following inside `dependencyResolutionManagement`:
+Add the GitHub Maven repository:
 
 ```kotlin
 dependencyResolutionManagement {
@@ -95,679 +41,205 @@ dependencyResolutionManagement {
         maven { url = uri("https://jitpack.io") }
         maven {
             url = uri("https://maven.pkg.github.com/STechQ/dist-plateau-mobile-android")
-            credentials {
-                username = "USERNAME"
-                password = "PASSWORD"
-            }
+            // credentials { username = "USERNAME"; password = "PASSWORD" } // if required
         }
     }
 }
 ```
 
-Add the following to your `app/build.gradle`:
-```groovy
+### app/build.gradle.kts
+
+```kotlin
 android {
+    dataBinding { enable = true }
+    buildFeatures { dataBinding = true }
     compileOptions {
-        coreLibraryDesugaringEnabled true
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    buildFeatures {
-        dataBinding true
-    }
+    kotlinOptions { jvmTarget = "17" }
+    kotlin { jvmToolchain(17) }
 }
 
 dependencies {
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
-}
-```
-
-## Gradle (Groovy DSL)
-
-Add the dependency to your `app/build.gradle`:
-```groovy
-dependencies {
-    implementation 'com.softtech.quick.sdk:plateausdk:1.8.2.028'
-}
-```
-
-## Maven
-```xml
-<dependency>
-  <groupId>com.softtech.quick.sdk</groupId>
-  <artifactId>plateausdk</artifactId>
-  <version>1.8.2.028</version>
-</dependency>
-```
-
----
-
-# 3. Quick Start
-
-1. Create an Activity in your application (ex: `MiniAppHostActivity`)
-2. Start this Activity with either:
-   - `MiniAppID` (appId)
-   - or `StartMiniAppParams`
-3. Inside `onCreate`, call:
-
-```kotlin
-MiniAppSdk.initialize(params, language, this)
-```
-
-✅ Quick runtime will initialize automatically.
-
-4. Implement `onInitialized(client)` and call:
-
-```kotlin
-quickService.render(pageName, paramsObject)
-```
-
-5. Implement fragment management callbacks (`onQuickFragmentCreated*`)
-6. Implement `onBackPressed()` to delegate back actions to Quick
-7. Release resources in `onDestroy()` (`quickService.release()`)
-
----
-
-# 4. Mandatory Overrides
-
----
-
-## 4.1 onCreate(savedInstanceState)
-
-### Purpose
-- Resolve MiniApp parameters from Intent
-- Resolve language
-- Call `MiniAppSdk.initialize(...)`
-- Prepare observers if needed
-
-### Expected behavior
-- `MiniAppID` or `StartMiniAppParams` must be resolved.
-- Initialization must be called.
-- Host application may decide UI behavior (toolbar, fullscreen etc.)
-
-Example:
-
-```kotlin
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-
-    val params = intent.getSerializableExtra(KEY_PARAMS) as? StartMiniAppParams
-        ?: intent.getStringExtra(KEY_MINI_APP_ID)
-            ?.let { StartMiniAppParams(it, null, null) }
-
-    val language = LanguageUtil.getLanguageIdentifier(this)
-
-    params?.let {
-        MiniAppSdk.initialize(it, language, this)
-    }
+    implementation("com.softtech.quick.sdk:plateausdk:1.8.3.003")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 ```
 
 ---
 
-## 4.2 onInitialized(client: QuickClient)
+## 3. Quick Start
 
-### Purpose
-Quick runtime calls this callback when it is ready.
-
-This is where the MiniApp should be rendered.
-
-### Expected behavior
-- Save `quickService`
-- Convert parameters to `QV8Object` (if any)
-- Render page
-
-```kotlin
-override fun onInitialized(client: QuickClient) {
-    quickService = client.quickService ?: return
-
-    val paramsObj: QV8Object? = intentParams?.params?.let {
-        ObjectUtil.convertToObject(it).asQV8Object
-    }
-
-    val page = intentParams?.pageName ?: client.pageLabel
-    quickService?.render(page, paramsObj)
-}
-```
+1. Create an Activity that implements `ActivityController`, `QuickService.AsyncInitialListener`, `QuickService.LoadingJsonServiceListener` and `QuickService.QuickCallBackListener`.
+2. Provide a layout containing:
+   - `FragmentContainerView` with id `q_content_fragment_layout`
+   - `LottieAnimationView` with id `lottieLoading`
+3. Build a `QuickSdk.Builder` with SSL pinning, base URL and app id, then `build(this).quickService`.
+4. Call `quickService.initializeAsync(this)` in `onCreate`, then `startRender(null)` inside `onInitialized(...)`.
 
 ---
 
-## 4.3 Fragment Navigation Management (ActivityController)
-
-### Purpose
-Quick framework creates `QFragment` objects and expects the host app to display them using `FragmentManager`.
-
-### Mandatory methods
-- `onQuickFragmentCreated(...)`
-- `onQuickFragmentCreatedWithAnimation(...)`
-- `onQuickBackPressed()`
-
-### Expected behavior
-- Hide current fragment (if QFragment)
-- Add the new fragment
-- Apply animation if provided
-- Fix fragment visibility after back
-
----
-
-## 4.4 onBackPressed()
-
-### Purpose
-- MiniApp navigation is handled internally by Quick
-- Host must delegate back events to Quick
-
-### Recommended behavior
-- If fragment backstack is 1 → close MiniApp
-- Else delegate to Quick
+## 4. Mandatory Implementation
 
 ```kotlin
-@Suppress("MissingSuperCall")
-override fun onBackPressed() {
-    if (supportFragmentManager.backStackEntryCount <= 1) {
-        stopMiniApp()
-        return
-    }
-
-    QuickInitializer.handleBack()
-}
-```
-
----
-
-## 4.5 stopMiniApp / release
-
-### Purpose
-MiniApp must release Quick runtime properly.
-
-```kotlin
-override fun stopMiniApp() {
-    release()
-    finish()
-}
-
-private fun release() {
-    quickService?.release()
-    quickService = null
-}
-```
-
----
-
-## 4.6 onDestroy()
-
-### Purpose
-Prevent memory leaks and release Quick runtime.
-
-```kotlin
-override fun onDestroy() {
-    quickService?.release()
-    quickService = null
-    super.onDestroy()
-}
-```
-
----
-
-## 4.7 onNewIntent(intent) (Recommended)
-
-### Purpose
-If your MiniApp supports NFC or intent-based events, you should forward new intents to the active fragment.
-
-Example behavior:
-- Check if top fragment is an NFC dialog
-- Call its processing method
-
-```kotlin
-override fun onNewIntent(intent: Intent) {
-    super.onNewIntent(intent)
-
-    val lastFragment = supportFragmentManager.fragments.lastOrNull()
-    if (lastFragment is STMiniAppNFCReaderDialog) {
-        lastFragment.processNFC(intent)
-    }
-}
-```
-
-If you don’t use NFC or intent events, this method may not be required.
-
----
-
-# 5. Host Activity Template (Copy & Use)
-
-> `setContentView(...)` and `containerId` are NOT fixed.  
-> Every company defines its own layout and fragment container.
-
-Below is a generic template Activity.
-
-```kotlin
-class MiniAppHostActivity :
+class MainActivity :
     AppCompatActivity(),
     ActivityController,
-    QuickClientCallbackListener,
-    QuickClient.InitializerListener,
-    QRuntimePermissionHandler {
+    QuickService.AsyncInitialListener,
+    QuickService.LoadingJsonServiceListener,
+    QuickService.QuickCallBackListener {
 
     private var quickService: QuickService? = null
-    private var intentParams: StartMiniAppParams? = null
-    private var networkLogger: NetworkLogger? = null
-
-    // Host application defines these
-    @LayoutRes
-    protected open val layoutResId: Int = R.layout.your_activity_layout
-
-    @IdRes
-    protected open val containerId: Int = R.id.your_fragment_container
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layoutResId)
+        setContentView(R.layout.activity_main)
 
-        intentParams =
-            intent.getSerializableExtra(KEY_PARAMS) as? StartMiniAppParams
-                ?: intent.getStringExtra(KEY_MINI_APP_ID)
-                    ?.let { StartMiniAppParams(it, null, null) }
-
-        if (savedInstanceState == null && intent.hasExtra(KEY_PARAMS)) {
-            intentParams = intent.getSerializableExtra(KEY_PARAMS) as? StartMiniAppParams
-        }
-
-        // The if block below was added for testing purposes. App ID can be tested by entering it manually.
-        // However, you must have the app id when starting this activity.
-        if (intentParams == null) {
-            intentParams = new StartMiniAppParams("TEST_APP_ID", null, null);
-        }
-
-        // Quick runtime initializes automatically inside initialize()
-        val config = QuickConfig()
-        val context: QuickContext = object : QuickContext {
-            override fun getAndroidApplication(): Application {
-                return getApplication()
-            }
-
-            override fun getAndroidActivity(): AppCompatActivity {
-                return this@MainActivity
-            }
-        }
-
-        config.setContext(context)
-        config.setJsonBaseUrl("JSON_BASE_URL")
-        config.setServiceBaseUrl("SERVICE_BASE_URL")
-        config.setCallbackListener(this)
-        config.setAppId(intentParams?.appId)
-        config.setIntentParams(intentParams)
-        config.setFunctionCallTimeoutSeconds(60L)
-        initQuickService(config)
-        QuickInitializer.initialize(config, this)
+        SoLoader.init(application, false)
+        initQuickService()
     }
 
-    private fun initQuickService(config: QuickConfig) {
-
-        val sslPinningConfig = DefaultSslPinningConfig.Builder()
-            .withSslPemFile("CERTIFICATE_CONTENT)
-            .withDomain("CERTIFICATE_DOMAIN")
-            .withCertificateId("CERTIFICATE_DOMAIN")
+    private fun initQuickService() {
+        val sslPinningConfig: SslPinningConfig = DefaultSslPinningConfig.Builder()
+            .withSslPemFile("<certificate>")
+            .withDomain("<base-domain>")
+            .withCertificateId("<certificate-id>")
             .build()
 
-        val platformInfo = QPlatform(getBaseContext()).getPlatFormInfo()
-        networkLogger = NetworkLogger(
-            MiniAppHttpRequestLogCollector(
-                config.getServiceBaseUrl(), config.getAppId(), platformInfo
-            )
-        )
-
         val builder = QuickSdk.Builder.newInstance()
-            .setAppId(config.getAppId())
-            .maxRequestRetryCount(0)
+            .setSettingsUrl("settings/settings_mobile.json") // null if not used
+            .setAppId("<app-id>")
             .setLanguage("tr-TR")
-            .setSettingsUrl(null)
-            .useEncrypt(true)
-            .setClientCustomFunctionTriggerListener(this)
+            .maxRequestRetryCount(0)
             .timeOutRequestSeconds(60)
             .addSslPinningConfig(sslPinningConfig)
-            .setBaseUrl(config.getServiceBaseUrl())
-            .setRuntimePermissionCaller(this)
-            .setPlatFormInfo(platformInfo)
-            .setHttpInterceptorListener(networkLogger)
+            .setClientCustomFunctionTriggerListener(this)
+            .setPlatFormInfo(QPlatform(baseContext).platFormInfo)
+            .setBaseUrl("<service-base-url>")
 
-        config.setQuickBuilder(builder)
+        quickService = builder.build(this).quickService
+        quickService?.updateSslPinning(builder.sslPinningConfig)
+        quickService?.initializeAsync(this)
     }
 
-    override fun onInitialized(client: QuickClient) {
-        quickService = client.quickService ?: return
-
-        val paramsObj: QV8Object? = intentParams?.params?.let {
-            ObjectUtil.convertToObject(it).asQV8Object
-        }
-
-        val page = intentParams?.pageName ?: client.pageLabel
-        quickService?.render(page, paramsObj)
+    override fun onInitialized(quickService: QuickService) {
+        this.quickService = quickService
+        quickService.startRender(null)
     }
 
-    override fun onQuickFragmentCreated(
-        addToBackStack: Boolean,
-        fragment: QFragment?,
-        tag: String?
-    ) {
+    // --- ActivityController ---
+
+    override fun onQuickFragmentCreated(addToBackStack: Boolean, fragment: QFragment, tag: String) {
         onQuickFragmentCreatedWithAnimation(addToBackStack, fragment, tag, null)
     }
 
     override fun onQuickFragmentCreatedWithAnimation(
         addToBackStack: Boolean,
-        fragment: QFragment,
+        fragment: QFragment?,
         tag: String?,
         pageTransitionAnimation: Animation?
     ) {
-        if (!isFinishing()) {
+        if (isFinishing) return
 
-            val fragmentTransaction: FragmentTransaction = getSupportFragmentManager().beginTransaction()
+        val transaction = supportFragmentManager.beginTransaction()
 
-            if (pageTransitionAnimation != null) {
-                if (pageTransitionAnimation.isInAnimation()) {
-                    fragmentTransaction.setCustomAnimations(pageTransitionAnimation.getEnterAnim(), 0, pageTransitionAnimation.getExitAnim(), 0)
-                } else {
-                    fragmentTransaction.setCustomAnimations(pageTransitionAnimation.getExitAnim(), 0, pageTransitionAnimation.getEnterAnim(), 0)
-                }
-            }
-
-            val fragmentsSize = getSupportFragmentManager().getFragments().size
-
-            if (fragmentsSize > 0) {
-                val currentFragment: Fragment =
-                        getSupportFragmentManager().getFragments().get(fragmentsSize - 1);
-
-                if (currentFragment is QFragment) {
-                    fragmentTransaction.hide(currentFragment);
-                }
-            }
-
-            fragmentTransaction.addToBackStack(tag);
-            fragmentTransaction.add(R.id.your_FragmentContainerView_id, fragment, tag);
-
-            if (!fragment.isStateSaved()) {
-                fragmentTransaction.commit();
+        pageTransitionAnimation?.let { anim ->
+            if (anim.isInAnimation) {
+                transaction.setCustomAnimations(anim.enterAnim, 0, anim.exitAnim, 0)
             } else {
-                fragmentTransaction.commitAllowingStateLoss();
+                transaction.setCustomAnimations(anim.exitAnim, 0, anim.enterAnim, 0)
             }
         }
+
+        val last = supportFragmentManager.fragments.lastOrNull()
+        if (last is QFragment) transaction.hide(last)
+
+        transaction.addToBackStack(tag)
+        fragment?.let { transaction.add(R.id.q_content_fragment_layout, it, tag) }
+
+        if (fragment?.isStateSaved == false) transaction.commit()
+        else transaction.commitAllowingStateLoss()
     }
 
     override fun onQuickBackPressed() {
         super.onBackPressed()
-        // Optional: fix animation direction / show hidden fragment
     }
 
-    @Suppress("MissingSuperCall")
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 1) {
-            stopMiniApp()
-            return
-        }
-
-        QuickInitializer.handleBack()
+        quickService?.handleBack()
     }
 
-    override fun requestRuntimePermissions(
-        permission: Array<out String>,
-        permissionListener: QRuntimePermissionListener
-    ) {
-        // Optional: connect your permission handler
-    }
-
-    override fun hasPermission(vararg p0: String): Boolean {
-        // Optional: implement permission check
-        return true
-    }
-
-    override fun setAppId(appId: String) {
-        QuickInitializer.setMiniAppAppId(appId)
-    }
-
-    override fun startMiniApp(params: StartMiniAppParams) {
-        val intent: Intent = newIntent(this, params)
-        startActivity(intent)
-    }
+    override fun startMiniApp(params: StartMiniAppParams) {}
 
     override fun stopMiniApp() {
-        release()
-        finish()
+        runOnUiThread { finish() }
     }
+
+    override fun getAndroidApplication(): Application = application
+
+    override fun goNativePage(screenId: String?, args: Map<String?, Any?>?, transitionAnimation: Animation?) {}
+
+    override fun setAppId(appId: String) {}
+
+    // --- Loading ---
+
+    override fun setLoadingJson(loadingJson: String) {}
+    override fun setLoadingUrl(loadingUrl: String) {}
+    override fun setLoadingJsonLocal() {}
+
+    override fun showLoading() {}
+    override fun hideLoading() {}
 
     override fun onDestroy() {
-        super.onDestroy()
-        release()
-    }
-
-    override fun onStop() {
-        if (networkLogger != null) {
-            networkLogger!!.getLogCollector().sendLogsToApi();
-        }
-        super.onStop();
-    }
-
-    override fun getAndroidApplication(): Application? {
-        return getApplication();
-    }
-
-    override fun callFunction(
-        functionName: String?,
-        params: QV8Element?,
-        resultListener: QuickService.FunctionCallBackListener?
-    ): Boolean {
-        return false
-    }
-
-    override fun callTokenFunction(
-        functionName: String?,
-        params: QV8Element?,
-        resultListener: QuickService.FunctionCallBackListener?
-    ): Boolean {
-        return false
-    }
-
-    private fun release() {
         quickService?.release()
-        quickService = null
-    }
-
-    companion object {
-        private const val KEY_MINI_APP_ID = "MiniAppID"
-        private const val KEY_PARAMS = "startMiniAppParams"
-
-        fun newIntent(context: Context?, appId: String): Intent {
-            val intent = Intent(context, MiniAppHostActivity::class.java)
-            val bundle = bundleOf(KEY_MINI_APP_ID to appId)
-            intent.putExtras(bundle)
-            return intent
-        }
-
-        fun newIntent(context: Context?, params: StartMiniAppParams): Intent {
-            val intent = Intent(context, MiniAppHostActivity::class.java)
-            val bundle = bundleOf(KEY_PARAMS to params)
-            intent.putExtras(bundle)
-            return intent
-        }
+        super.onDestroy()
     }
 }
 ```
 
----
-
-## ContainerId Recommendation
-
-Because fragment management is required, you should provide a container.
-
-Recommended solution:
-- Create a dedicated layout for MiniApp screen containing only a `FragmentContainerView`.
-
-Example:
-
-```xml
-<androidx.fragment.app.FragmentContainerView
-    android:id="@+id/miniapp_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
-```
+> Certificate, domain, app id and base URL values come from your Plateau project configuration. Unused `ActivityController` / loading callbacks can be left as no-ops.
 
 ---
 
-# 6. Optional JS → Native Bridge
+## 5. Optional JS → Native Bridge
 
-`callFunction` and `callTokenFunction` are optional.
-
-However, it is recommended to provide at least one example for integration clarity.
-
----
-
-## 6.1 callFunction Example (GetDeviceId)
-
-### Scenario
-MiniApp requests a unique device identifier.
-
-- FunctionName: `GetDeviceId`
-- Params: none
-- Return:
-
-```json
-{ "deviceId": "..." }
-```
-
-Example implementation:
+Implement `callFunction` / `callTokenFunction` to expose native capabilities. Unrecognized names must return `false` (or call `onFunctionError`).
 
 ```kotlin
 override fun callFunction(
     functionName: String?,
     params: QV8Element?,
-    callback: QuickService.FunctionCallBackListener
-): Boolean {
-    if (functionName == "GetDeviceId") {
-        val result = QV8Object().apply {
-            add("deviceId", DeviceUtils.getUniqueDeviceId())
-        }
-        callback.onFunctionResult(result)
-        return true
-    }
-    return false
-}
-```
-
----
-
-## 6.2 callTokenFunction Example (BI_FROST)
-
-### Scenario
-MiniApp requests token via special token channel.
-
-- FunctionName: `BI_FROST`
-- Return:
-
-```json
-{
-  "actionToken": "...",
-  "cv": "..."
-}
-```
-
-Example implementation:
-
-```kotlin
-override fun callTokenFunction(
-    functionName: String,
-    params: QV8Element?,
     resultListener: QuickService.FunctionCallBackListener
 ): Boolean {
-    if (functionName == "BI_FROST") {
-        val result = QV8Object().apply {
-            add("actionToken", "YOUR_ACTION_TOKEN")
-            add("cv", "YOUR_CV")
+    val v8Object = QV8Object()
+    var handled = false
+
+    when (functionName) {
+        "GetDeviceId" -> {
+            v8Object.add("deviceId", "<unique-device-id>")
+            handled = true
         }
-        resultListener.onFunctionResult(result)
-        return true
+        else -> Log.e("MyApp", "Default Case: $functionName")
     }
-    return false
+
+    if (handled) resultListener.onFunctionResult(v8Object)
+    return handled
 }
 ```
 
 ---
 
-# 7. Optional Modules
+## 6. Checklist
 
-These features are **optional** and should be integrated only if required by the host application.
-
-- Seal / Signature / Documents:
-  - `GetTransactionDetail`
-  - `DownloadDocument`
-  - `SignDocument`
-  - `SignTransaction`
-
-- Analytics tracking:
-  - `dataroidTrack`
-
-- Customer information:
-  - `GetIdentity`
-  - `GetMailAddress`
-  - `GetPhoneNumber`
-  - `GetCustomerNumber`
-
-- Device & Network:
-  - `GetClientIp`
-  - `GetDeviceId`
-
-- Runtime permissions:
-  - Camera / Location (only if used by MiniApp screens)
-
----
-
-# 8. Recommended Architecture (Provider/Bridge Pattern)
-
-To prevent the host Activity from becoming too large, it is recommended to isolate optional features into provider interfaces.
-
-Example provider groups:
-
-- `MiniAppDeviceProvider` (deviceId, ip)
-- `MiniAppUserProvider` (identity, phone, email)
-- `MiniAppTokenProvider` (BI_FROST etc.)
-- `MiniAppAnalyticsProvider` (track events)
-- `MiniAppDocumentSigner` (seal/signature/document)
-
-With this design:
-- Each company integrates only what it needs.
-- Unsupported features can return `"not supported"` errors.
-
----
-
-# 9. Troubleshooting
-
-### MiniApp screen is blank / not rendering
-- Is `onInitialized(client)` called?
-- Is `client.quickService` null?
-- Is `render(page, params)` called correctly?
-- Is `MiniAppID` or `StartMiniAppParams` resolved correctly?
-
-### Back button does not work
-- Is `QuickInitializer.handleBack()` called in `onBackPressed()`?
-- Is fragment backstack logic correct (`<=1` close MiniApp)?
-- Are fragments added to backstack properly?
-
-### callFunction callback does not return (optional)
-- Is `callback.onFunctionResult(...)` always called?
-- Is QV8Object format correct?
-- Is async callback reference stored correctly?
-
-### Permission request does not work
-- Are permissions declared in AndroidManifest?
-- Is `hasPermission()` implemented correctly?
-- Is the listener triggered after user decision?
-
----
-
-# 10. Integration Checklist
-
-☑ MiniAppID or StartMiniAppParams is passed via Intent  
-☑ `MiniAppSdk.initialize(...)` is called inside `onCreate`  
-☑ `onInitialized(...)` renders the first page using QuickService  
-☑ Fragment callbacks are implemented (Quick fragment navigation works)  
-☑ `onBackPressed()` delegates back action to Quick  
-☑ `quickService.release()` is called in `onDestroy()`  
-☑ Optional `callFunction/callTokenFunction` examples are implemented if needed  
-☑ Optional Seal / Analytics / Token features are integrated only when required  
+☑ `plateausdk` dependency + data binding + desugaring added  
+☑ Activity implements `ActivityController` + `QuickService` listeners  
+☑ Layout contains `q_content_fragment_layout` and `lottieLoading`  
+☑ `QuickSdk.Builder` built and `initializeAsync(...)` called  
+☑ `startRender(...)` called in `onInitialized()`  
+☑ `quickService.release()` in `onDestroy()`  
+☑ Baseline permissions (`INTERNET`, `ACCESS_NETWORK_STATE`) declared  
 
 ---
 
