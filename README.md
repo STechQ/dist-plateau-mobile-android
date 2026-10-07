@@ -63,7 +63,7 @@ android {
 }
 
 dependencies {
-    implementation("com.softtech.quick.sdk:plateausdk:1.8.3.003")
+    implementation("com.softtech.quick.sdk:plateausdk:1.8.3.006")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 ```
