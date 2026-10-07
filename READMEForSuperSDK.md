@@ -23,7 +23,7 @@
 *Libraries*
 
     // Plateau Mobile SDK Files
-    implementation 'com.softtech.quick.sdk:plateausdk:1.8.3.003'
+    implementation 'com.softtech.quick.sdk:plateausdk:1.8.3.006'
 
 *Compile Options*
 
